@@ -1,8 +1,8 @@
 const { Schema, model } = require("mongoose");
 const bcrypt = require("bcrypt");
 
-// Schema to create User model
-const userSchema = new Schema(
+// Schema to create UserProjectManager model
+const userProjectManagerSchema = new Schema(
 	{
 		username: {
 			type: String,
@@ -48,7 +48,7 @@ const userSchema = new Schema(
 );
 
 // Hash user's password
-userSchema.pre("save", async function (next) {
+userProjectManagerSchema.pre("save", async function (next) {
 	if (this.isNew || this.isModified("password")) {
 		const saltRounds = 10;
 		this.password = await bcrypt.hash(this.password, saltRounds);
@@ -58,21 +58,24 @@ userSchema.pre("save", async function (next) {
 });
 
 // Custom method to compare and validate password when user logs in
-userSchema.methods.isCorrectPassword = async function (password) {
+userProjectManagerSchema.methods.isCorrectPassword = async function (password) {
 	return bcrypt.compare(password, this.password);
 };
 
 // Create a virtual property "projectCount" that gets the number of projects a user has
-userSchema.virtual("projectCount").get(function () {
+userProjectManagerSchema.virtual("projectCount").get(function () {
 	return this.projects.length;
 });
 
-// Create a virtual property "teamCount" that gets the number of people in a users's team
-userSchema.virtual("teamCount").get(function () {
+// Create a virtual property "teamCount" that gets the number of people in a user's team
+userProjectManagerSchema.virtual("teamCount").get(function () {
 	return this.teamMembers.length;
 });
 
-// Initialise User model
-const User = model("user", userSchema);
+// Initialise UserProjectManager model
+const UserProjectManager = model(
+	"UserProjectManager",
+	userProjectManagerSchema
+);
 
-module.exports = User;
+module.exports = UserProjectManager;
