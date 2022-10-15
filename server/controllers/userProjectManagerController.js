@@ -16,7 +16,7 @@ module.exports = {
 	},
 
 	// Upon sign up, create a project manager user, sign a token and send it back to client/src/components/SignUpForm.js
-	async createUser({ body }, res) {
+	async signupUserProjectManager({ body }, res) {
 		const user = await UserProjectManager.create(body);
 
 		if (!user) {
@@ -30,15 +30,13 @@ module.exports = {
 	},
 
 	// Upon log in, log in the project manager user based on username, sign a token and send it back to client/src/components/LoginForm.js)
-	async login({ body }, res) {
+	async loginUserProjectManager({ body }, res) {
 		const user = await UserProjectManager.findOne({ username: body.username });
 
 		if (!user) {
-			return res
-				.status(400)
-				.json({
-					message: "Unable to find project manager user with this username.",
-				});
+			return res.status(400).json({
+				message: "Unable to find project manager user with this username.",
+			});
 		}
 
 		// Check password
