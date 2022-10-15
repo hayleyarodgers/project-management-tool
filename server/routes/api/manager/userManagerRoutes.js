@@ -1,7 +1,7 @@
 const router = require("express").Router();
 
 const {
-	getSingleUserManager,
+	getUserManager,
 	signupUserManager,
 	loginUserManager,
 } = require("../../../controllers/manager/userManagerController");
@@ -16,6 +16,6 @@ router.route("/").post(signupUserManager);
 router.route("/login").post(loginUserManager);
 
 // /api/manager/users/me
-router.route("/me").get(authMiddleware, getSingleUserManager);
+router.route("/me").get(authMiddleware, getUserManager);
 
 module.exports = router;

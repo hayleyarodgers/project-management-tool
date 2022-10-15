@@ -2,17 +2,17 @@ const router = require("express").Router();
 
 const {
 	getAllProjects,
-	getSingleProject,
+	getProject,
 	createProject,
 	updateProject,
 	deleteProject,
 	getAllFeatures,
-	getSingleFeature,
+	getFeature,
 	createFeature,
 	updateFeature,
 	deleteFeature,
 	getAllTasks,
-	getSingleTask,
+	getTask,
 	createTask,
 	updateTask,
 	deleteTask,
@@ -24,7 +24,7 @@ router.route("/").get(getAllProjects).post(createProject);
 // /api/manager/projects/:projectId
 router
 	.route("/:projectId")
-	.get(getSingleProject)
+	.get(getProject)
 	.put(updateProject)
 	.delete(deleteProject);
 
@@ -34,7 +34,7 @@ router.route("/:projectId/features").get(getAllFeatures).post(createFeature);
 // /api/manager/projects/:projectId/features/:featureId
 router
 	.route("/:projectId/features/:featureId")
-	.get(getSingleFeature)
+	.get(getFeature)
 	.put(updateFeature)
 	.delete(deleteFeature);
 
@@ -47,7 +47,7 @@ router
 // /api/manager/projects/:projectId/features/:featureId/tasks/:taskId
 router
 	.route("/:projectId/features/:featureId/tasks/:taskId")
-	.get(getSingleTask)
+	.get(getTask)
 	.put(updateTask)
 	.delete(deleteTask);
 

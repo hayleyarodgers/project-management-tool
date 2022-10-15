@@ -5,7 +5,7 @@ const { signToken } = require("../../utils/auth");
 
 module.exports = {
 	// Get a manager user by their id
-	async getSingleUserManager({ params }, res) {
+	async getUserManager({ params }, res) {
 		const user = await UserManager.findOne({ _id: params.userId });
 
 		if (!user) {
