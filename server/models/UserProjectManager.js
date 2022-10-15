@@ -74,7 +74,7 @@ userProjectManagerSchema.virtual("teamCount").get(function () {
 
 // Initialise UserProjectManager model
 const UserProjectManager = model(
-	"UserProjectManager",
+	"userProjectManager",
 	userProjectManagerSchema
 );
 
