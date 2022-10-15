@@ -35,7 +35,7 @@ const teamMemberSchema = new Schema(
 		features: [
 			{
 				type: Schema.Types.ObjectId,
-				ref: "feature",
+				ref: "Feature",
 			},
 		],
 	},
@@ -53,6 +53,6 @@ teamMemberSchema.virtual("featureCount").get(function () {
 });
 
 // Initialise TeamMember model
-const TeamMember = model("teamMember", teamMemberSchema);
+const TeamMember = model("TeamMember", teamMemberSchema);
 
 module.exports = TeamMember;

@@ -28,14 +28,14 @@ const userProjectManagerSchema = new Schema(
 		projects: [
 			{
 				type: Schema.Types.ObjectId,
-				ref: "project",
+				ref: "Project",
 			},
 		],
 		// Array of ids of team members created by a user
 		teamMembers: [
 			{
 				type: Schema.Types.ObjectId,
-				ref: "teamMember",
+				ref: "TeamMember",
 			},
 		],
 	},
@@ -74,7 +74,7 @@ userProjectManagerSchema.virtual("teamCount").get(function () {
 
 // Initialise UserProjectManager model
 const UserProjectManager = model(
-	"userProjectManager",
+	"UserProjectManager",
 	userProjectManagerSchema
 );
 

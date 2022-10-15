@@ -20,7 +20,7 @@ const taskSchema = new Schema(
 		},
 		taskAssignee: {
 			type: Schema.Types.ObjectId,
-			ref: "teamMember",
+			ref: "TeamMember",
 		},
 		taskTimeEstimate: {
 			type: Number,
@@ -51,6 +51,6 @@ taskSchema.virtual("taskEfficiency").get(function () {
 	return this.taskTimeActual / this.taskTimeEstimate;
 });
 
-const Task = model("task", taskSchema);
+const Task = model("Task", taskSchema);
 
 module.exports = Task;

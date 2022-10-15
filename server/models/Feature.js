@@ -25,7 +25,7 @@ const featureSchema = new Schema(
 		},
 		featureAssignee: {
 			type: Schema.Types.ObjectId,
-			ref: "teamMember",
+			ref: "TeamMember",
 		},
 		createdAt: {
 			type: Date,
@@ -48,6 +48,6 @@ featureSchema.virtual("taskCount").get(function () {
 	return this.tasks.length;
 });
 
-const Feature = model("feature", featureSchema);
+const Feature = model("Feature", featureSchema);
 
 module.exports = Feature;

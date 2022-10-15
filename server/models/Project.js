@@ -35,7 +35,7 @@ const projectSchema = new Schema(
 		projectTeamMembers: [
 			{
 				type: Schema.Types.ObjectId,
-				ref: "teamMember",
+				ref: "TeamMember",
 			},
 		],
 		projectManager: {
@@ -64,6 +64,6 @@ projectSchema.virtual("featureCount").get(function () {
 	return this.features.length;
 });
 
-const Project = model("project", projectSchema);
+const Project = model("Project", projectSchema);
 
 module.exports = Project;
