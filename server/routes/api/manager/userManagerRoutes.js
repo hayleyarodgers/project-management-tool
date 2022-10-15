@@ -4,7 +4,7 @@ const {
 	getSingleUserManager,
 	signupUserManager,
 	loginUserManager,
-} = require("../../../controllers/userManagerController");
+} = require("../../../controllers/manager/userManagerController");
 
 // Import authorisation middleware to be used anywhere we need to send a token for verification of user
 const { authMiddleware } = require("../../../utils/auth");
