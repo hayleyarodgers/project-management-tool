@@ -1,5 +1,3 @@
-/* Schema to create the feature field's subdocument schema in the Project model */
-
 const { Schema, model } = require("mongoose");
 const taskSchema = require("./Task");
 

@@ -1,5 +1,3 @@
-/* Schema to create the task field's subdocument schema in the Feature model */
-
 const { Schema, model } = require("mongoose");
 
 // Helper function to format date
