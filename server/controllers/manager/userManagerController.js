@@ -12,7 +12,7 @@ module.exports = {
 			return res.status(400).json({ message: "No user with that id." });
 		}
 
-		res.json(user);
+		res.status(200).json(user);
 	},
 
 	// Upon sign up, create a manager user, sign a token and send it back to client/src/components/SignUpForm.js
@@ -26,7 +26,7 @@ module.exports = {
 		}
 
 		const token = signToken(user);
-		res.json({ token, user });
+		res.status(200).json({ token, user });
 	},
 
 	// Upon log in, log in the manager user based on username, sign a token and send it back to client/src/components/LoginForm.js)
@@ -47,6 +47,6 @@ module.exports = {
 		}
 
 		const token = signToken(user);
-		res.json({ token, user });
+		res.status(200).json({ token, user });
 	},
 };
