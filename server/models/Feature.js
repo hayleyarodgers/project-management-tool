@@ -6,7 +6,7 @@ const taskSchema = require("./Task");
 // Helper function to format date
 const dateFormat = require("../utils/dateFormat");
 
-// Schema to create Feature model
+// Schema to create the feature field's subdocument schema in the Project model
 const featureSchema = new Schema(
 	{
 		featureName: {
