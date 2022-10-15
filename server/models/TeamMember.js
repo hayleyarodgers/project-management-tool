@@ -27,10 +27,6 @@ const teamMemberSchema = new Schema(
 			type: Number,
 			required: true,
 		},
-		salary: {
-			type: Number,
-			required: true,
-		},
 		// Array of ids of features assigned to team member
 		features: [
 			{

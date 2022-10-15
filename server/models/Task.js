@@ -18,9 +18,14 @@ const taskSchema = new Schema(
 			maxlength: 280,
 			trim: true,
 		},
-		taskAssignee: {
-			type: Schema.Types.ObjectId,
-			ref: "TeamMember",
+		taskCreatedAt: {
+			type: Date,
+			default: Date.now,
+			get: (timestamp) => dateFormat(timestamp),
+		},
+		taskFinishedAt: {
+			type: Date,
+			get: (timestamp) => dateFormat(timestamp),
 		},
 		taskTimeEstimate: {
 			type: Number,
@@ -28,14 +33,6 @@ const taskSchema = new Schema(
 		},
 		taskTimeActual: {
 			type: Number,
-		},
-		createdAt: {
-			type: Date,
-			default: Date.now,
-			get: (timestamp) => dateFormat(timestamp),
-		},
-		finishedAt: {
-			type: Date,
 		},
 	},
 	// Allow use of virtuals below

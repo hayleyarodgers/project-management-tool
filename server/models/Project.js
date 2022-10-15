@@ -27,11 +27,6 @@ const projectSchema = new Schema(
 			maxlength: 280,
 			trim: true,
 		},
-		projectTech: {
-			type: String,
-			required: true,
-			trim: true,
-		},
 		projectTeamMembers: [
 			{
 				type: Schema.Types.ObjectId,
@@ -47,6 +42,12 @@ const projectSchema = new Schema(
 			type: Date,
 			default: Date.now,
 			get: (timestamp) => dateFormat(timestamp),
+		},
+		projectTimeEstimate: {
+			type: Number,
+		},
+		projectTimeActual: {
+			type: Number,
 		},
 		// Array of nested feature documents
 		features: [featureSchema],

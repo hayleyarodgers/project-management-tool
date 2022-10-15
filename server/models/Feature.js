@@ -22,15 +22,26 @@ const featureSchema = new Schema(
 		featureMustHave: {
 			type: Boolean,
 			required: true,
+			default: true,
 		},
 		featureAssignee: {
 			type: Schema.Types.ObjectId,
 			ref: "TeamMember",
 		},
-		createdAt: {
+		featureCreatedAt: {
 			type: Date,
 			default: Date.now,
 			get: (timestamp) => dateFormat(timestamp),
+		},
+		featureFinishedAt: {
+			type: Date,
+			get: (timestamp) => dateFormat(timestamp),
+		},
+		featureTimeEstimate: {
+			type: Number,
+		},
+		featureTimeActual: {
+			type: Number,
 		},
 		// Array of nested task documents
 		tasks: [taskSchema],
