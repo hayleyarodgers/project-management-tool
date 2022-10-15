@@ -1,5 +1,7 @@
 const UserProjectManager = require("./UserProjectManager");
-const Project = require("./Project");
 const TeamMember = require("./TeamMember");
+const Project = require("./Project");
+const Feature = require("./Feature");
+const Task = require("./Task");
 
-module.exports = { UserProjectManager, Project, TeamMember };
+module.exports = { UserProjectManager, TeamMember, Project, Feature, Task };
