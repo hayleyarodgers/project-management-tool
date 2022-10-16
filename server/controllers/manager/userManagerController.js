@@ -29,7 +29,7 @@ module.exports = {
 		res.status(200).json({ token, user });
 	},
 
-	// Upon log in, log in the manager user based on username, sign a token and send it back to client/src/components/LoginForm.js)
+	// Upon log in, log in the manager user based on username, sign a token and send it back to client/src/components/LoginForm.js
 	async loginUserManager({ body }, res) {
 		const user = await UserManager.findOne({ username: body.username });
 
