@@ -1,4 +1,4 @@
-const { Schema, model } = require("mongoose");
+const { Schema, Types } = require("mongoose");
 
 // Helper function to format date
 const dateFormat = require("../utils/dateFormat");
@@ -6,6 +6,10 @@ const dateFormat = require("../utils/dateFormat");
 // Schema to create the task field's subdocument schema in the Feature model
 const taskSchema = new Schema(
 	{
+		taskId: {
+			type: Schema.Types.ObjectId,
+			default: () => new Types.ObjectId(),
+		},
 		taskName: {
 			type: String,
 			required: "Your task needs a name.",
@@ -40,6 +44,7 @@ const taskSchema = new Schema(
 		toJSON: {
 			virtuals: true,
 		},
+		id: false,
 	}
 );
 
@@ -48,6 +53,4 @@ taskSchema.virtual("taskEfficiency").get(function () {
 	return this.taskTimeActual / this.taskTimeEstimate;
 });
 
-const Task = model("Task", taskSchema);
-
-module.exports = Task;
+module.exports = taskSchema;
