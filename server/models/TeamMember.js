@@ -27,11 +27,6 @@ const teamMemberSchema = new Schema(
 			type: Number,
 			required: true,
 		},
-		projectManager: {
-			type: String,
-			required: true,
-			trim: true,
-		},
 	},
 	// Allow use of virtuals below
 	{
