@@ -5,14 +5,19 @@ const { signToken } = require("../../utils/auth");
 
 module.exports = {
 	// Get a manager user by their id
-	async getUserManager({ params }, res) {
-		const user = await UserManager.findOne({ _id: params.userId });
+	async getUserManager({ user = null, params }, res) {
+		const foundUser = await UserManager.findOne({
+			$or: [
+				{ _id: user ? user._id : params.id },
+				{ username: params.username },
+			],
+		});
 
-		if (!user) {
+		if (!foundUser) {
 			return res.status(400).json({ message: "No user with that id." });
 		}
 
-		res.status(200).json(user);
+		res.status(200).json(foundUser);
 	},
 
 	// Upon sign up, create a manager user, sign a token and send it back to client/src/components/SignUpForm.js
