@@ -15,7 +15,7 @@ module.exports = {
 
 	// Get a team member by their id
 	async getTeamMember({ params }, res) {
-		const teamMember = await TeamMember.findOne({ _id: params.id });
+		const teamMember = await TeamMember.findOne({ _id: params.teamMemberId });
 
 		if (!teamMember) {
 			return res
@@ -38,9 +38,9 @@ module.exports = {
 	},
 
 	// Update team member
-	async updateTeamMember({ body }, res) {
+	async updateTeamMember({ body, params }, res) {
 		const teamMember = await TeamMember.findOneAndUpdate(
-			{ _id: body.id },
+			{ _id: params.teamMemberId },
 			{ $set: body },
 			{ runValidators: true, new: true }
 		);
@@ -53,8 +53,10 @@ module.exports = {
 	},
 
 	// Delete team member
-	async deleteTeamMember({ body }, res) {
-		const teamMember = await TeamMember.findOneAndDelete({ _id: body.id });
+	async deleteTeamMember({ params }, res) {
+		const teamMember = await TeamMember.findOneAndDelete({
+			_id: params.teamMemberId,
+		});
 
 		if (!teamMember) {
 			return res.status(400).json({ message: "Unable to delete team member." });
