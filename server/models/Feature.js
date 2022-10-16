@@ -47,7 +47,7 @@ const featureSchema = new Schema(
 		featureTimeActual: {
 			type: Number,
 		},
-		// Array of nested task documents
+		// Array of task subdocuments
 		tasks: [taskSchema],
 	},
 	// Allow use of virtuals below

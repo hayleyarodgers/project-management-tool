@@ -49,7 +49,7 @@ const projectSchema = new Schema(
 		projectTimeActual: {
 			type: Number,
 		},
-		// Array of nested feature documents
+		// Array of feature subdocuments
 		features: [featureSchema],
 	},
 	// Allow use of virtuals below
