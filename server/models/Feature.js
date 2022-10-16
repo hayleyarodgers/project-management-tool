@@ -1,4 +1,4 @@
-const { Schema, Types } = require("mongoose");
+const { Schema } = require("mongoose");
 const taskSchema = require("./Task");
 
 // Helper function to format date
@@ -7,10 +7,6 @@ const dateFormat = require("../utils/dateFormat");
 // Schema to create the feature field's subdocument schema in the Project model
 const featureSchema = new Schema(
 	{
-		featureId: {
-			type: Schema.Types.ObjectId,
-			default: () => new Types.ObjectId(),
-		},
 		featureName: {
 			type: String,
 			required: "Your feature needs a name.",
@@ -55,7 +51,6 @@ const featureSchema = new Schema(
 		toJSON: {
 			virtuals: true,
 		},
-		id: false,
 	}
 );
 

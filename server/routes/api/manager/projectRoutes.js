@@ -12,10 +12,10 @@ const {
 	updateFeature,
 	deleteFeature,
 	getAllTasks,
-	getTask,
+	/*getTask,*/
 	createTask,
-	updateTask,
-	deleteTask,
+	/*updateTask,
+	deleteTask,*/
 } = require("../../../controllers/manager/projectController");
 
 // /api/manager/projects
@@ -43,12 +43,12 @@ router
 	.route("/:projectId/features/:featureId/tasks")
 	.get(getAllTasks)
 	.post(createTask);
-
+/*
 // /api/manager/projects/:projectId/features/:featureId/tasks/:taskId
 router
 	.route("/:projectId/features/:featureId/tasks/:taskId")
 	.get(getTask)
 	.put(updateTask)
 	.delete(deleteTask);
-
+*/
 module.exports = router;
