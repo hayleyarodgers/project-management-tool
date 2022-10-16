@@ -2,7 +2,7 @@ const router = require("express").Router();
 
 const {
 	getAllTeamMembers,
-	getSingleTeamMember,
+	getTeamMember,
 	createTeamMember,
 	updateTeamMember,
 	deleteTeamMember,
@@ -14,7 +14,7 @@ router.route("/").get(getAllTeamMembers).post(createTeamMember);
 // /api/manager/team/:teamMemberId
 router
 	.route("/:teamMemberId")
-	.get(getSingleTeamMember)
+	.get(getTeamMember)
 	.put(updateTeamMember)
 	.delete(deleteTeamMember);
 
