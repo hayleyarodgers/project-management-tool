@@ -116,11 +116,14 @@ module.exports = {
 	},
 
 	// Update feature in project
-	// NOT WORKING...
 	async updateFeature({ body, params }, res) {
+		const projectData = await Project.findOne({ _id: params.projectId });
+		const feature = projectData.features.id(params.featureId);
+		const updatedFeature = { ...feature.toJSON(), ...body };
+
 		const project = await Project.findOneAndUpdate(
-			{ _id: params.projectId, "features.featureId": params.featureId },
-			{ $set: { "features.$": body } },
+			{ _id: params.projectId, "features._id": params.featureId },
+			{ $set: { "features.$": updatedFeature } },
 			{ runValidators: true, new: true }
 		);
 
@@ -140,7 +143,7 @@ module.exports = {
 		);
 
 		if (!project) {
-			return res.status(400).json({ message: "Unable to delete feature," });
+			return res.status(400).json({ message: "Unable to delete feature." });
 		}
 
 		res.status(200).json({ message: "Feature deleted." });
@@ -160,24 +163,71 @@ module.exports = {
 	},
 
 	// Get one task in feature
+	async getTask({ params }, res) {
+		const project = await Project.findOne({ _id: params.projectId });
+		const feature = project.features.id(params.featureId);
+		const task = feature.tasks.id(params.taskId);
+
+		if (!task) {
+			return res.status(400).json({ message: "Unable to get task." });
+		}
+
+		res.status(200).json(task);
+	},
 
 	// Add task to feature
-	// NOT WORKING - need some way to specify which feature's tasks we're looking at
 	async createTask({ body, params }, res) {
 		const project = await Project.findOneAndUpdate(
-			{ _id: params.projectId },
-			{ $push: { features: { tasks: { body } } } },
+			{ _id: params.projectId, "features._id": params.featureId },
+			{ $push: { "features.$.tasks": body } },
 			{ runValidators: true, new: true }
 		);
 
 		if (!project) {
-			return res.status(400).json({ message: "Unable to create feature." });
+			return res.status(400).json({ message: "Unable to create task." });
 		}
 
 		res.status(200).json(project);
 	},
 
 	// Update task in feature
+	// NOT WORKING
+	async updateTask({ body, params }, res) {
+		const projectData = await Project.findOne({ _id: params.projectId });
+		const featureData = projectData.features.id(params.featureId);
+		const task = featureData.tasks.id(params.taskId);
+		const updatedTask = { ...task.toJSON(), ...body };
+
+		const project = await Project.findOneAndUpdate(
+			{
+				_id: params.projectId,
+				"features._id": params.featureId,
+				"tasks._id": params.taskId,
+			},
+			{ $set: { "features.$.tasks.$": updatedTask } },
+			{ runValidators: true, new: true }
+		);
+
+		if (!project) {
+			return res.status(400).json({ message: "Unable to update task." });
+		}
+
+		res.status(200).json(project);
+	},
 
 	// Delete task in feature
+	// NOT WORKING
+	async deleteTask({ params }, res) {
+		const project = await Project.findOneAndUpdate(
+			{ _id: params.projectId, "features._id": params.featureId },
+			{ $pull: { "features.$": { tasks: { _id: params.taskId } } } },
+			{ new: true }
+		);
+
+		if (!project) {
+			return res.status(400).json({ message: "Unable to delete task." });
+		}
+
+		res.status(200).json({ message: "Task deleted." });
+	},
 };
