@@ -6,12 +6,12 @@ const {
 	createTeamMember,
 	updateTeamMember,
 	deleteTeamMember,
-} = require("../../../controllers/manager/teamMemberController");
+} = require("../../controllers/teamMemberController");
 
-// /api/manager/team
+// /api/team
 router.route("/").get(getAllTeamMembers).post(createTeamMember);
 
-// /api/manager/team/:teamMemberId
+// /api/team/:teamMemberId
 router
 	.route("/:teamMemberId")
 	.get(getTeamMember)

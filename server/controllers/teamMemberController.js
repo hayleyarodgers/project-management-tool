@@ -1,5 +1,5 @@
 // Import team member model
-const { TeamMember, UserManager } = require("../../models");
+const { TeamMember, User } = require("../models");
 
 module.exports = {
 	// Get all team members
@@ -34,8 +34,9 @@ module.exports = {
 			return res.status(400).json({ message: "Unable to create team member." });
 		}
 
-		const manager = await UserManager.findOneAndUpdate(
-			{ _id: body.userManagerId },
+		// Add team member to the team of the person creating this user (manager)
+		const manager = await User.findOneAndUpdate(
+			{ _id: body.managerId },
 			{ $addToSet: { teamMembers: teamMember._id } },
 			{ new: true }
 		);

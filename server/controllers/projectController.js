@@ -1,5 +1,5 @@
 // Import project, feature and task models
-const { Project, UserManager } = require("../../models");
+const { Project, User } = require("../models");
 
 module.exports = {
 	// Get all projects
@@ -34,8 +34,9 @@ module.exports = {
 			return res.status(400).json({ message: "Unable to create project." });
 		}
 
-		const user = await UserManager.findOneAndUpdate(
-			{ _id: body.userManagerId },
+		// Add project to list of those created by the current user (manager)
+		const user = await User.findOneAndUpdate(
+			{ _id: body.managerId },
 			{ $addToSet: { projects: project._id } },
 			{ new: true }
 		);
