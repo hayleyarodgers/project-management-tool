@@ -9,16 +9,6 @@ const teamMemberSchema = new Schema(
 			unique: true,
 			trim: true,
 		},
-		email: {
-			type: String,
-			required: true,
-			unique: true,
-			// Use regex to validate email
-			match: [
-				/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
-				"Please use a valid email address.",
-			],
-		},
 		role: {
 			type: String,
 			required: true,
@@ -35,11 +25,6 @@ const teamMemberSchema = new Schema(
 		},
 	}
 );
-
-// Create a virtual property "featureCount" that gets the number of features a team member has
-teamMemberSchema.virtual("featureCount").get(function () {
-	return this.features.length;
-});
 
 // Initialise TeamMember model
 const TeamMember = model("TeamMember", teamMemberSchema);
