@@ -43,12 +43,6 @@ const projectSchema = new Schema(
 			default: Date.now,
 			get: (timestamp) => dateFormat(timestamp),
 		},
-		projectTimeEstimate: {
-			type: Number,
-		},
-		projectTimeActual: {
-			type: Number,
-		},
 		// Array of feature subdocuments
 		features: [featureSchema],
 	},
@@ -63,6 +57,21 @@ const projectSchema = new Schema(
 // Create a virtual property "featureCount" that gets the number of features a project has
 projectSchema.virtual("featureCount").get(function () {
 	return this.features.length;
+});
+
+// Create a virtual property "projectTimeEstimate" that gets the total estimated time for of all this project's features
+projectSchema.virtual("projectTimeEstimate").get(function () {
+	const featureTimeEstimateArray = [0];
+
+	for (let i = 0; i < this.features.length; i++) {
+		featureTimeEstimateArray.push(this.features[i].featureTimeEstimate);
+	}
+
+	const getSum = (total, num) => {
+		return total + num;
+	};
+
+	return featureTimeEstimateArray.reduce(getSum);
 });
 
 const Project = model("Project", projectSchema);
