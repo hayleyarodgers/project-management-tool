@@ -191,20 +191,23 @@ module.exports = {
 	},
 
 	// Update task in feature
-	// NOT WORKING
 	async updateTask({ body, params }, res) {
 		const projectData = await Project.findOne({ _id: params.projectId });
 		const featureData = projectData.features.id(params.featureId);
-		const task = featureData.tasks.id(params.taskId);
-		const updatedTask = { ...task.toJSON(), ...body };
+		const taskArray = featureData.tasks;
+
+		const newTaskArray = taskArray.map((item) => {
+			if (item._id == params.taskId) {
+				return { ...item.toJSON(), ...body };
+			} else return item;
+		});
 
 		const project = await Project.findOneAndUpdate(
 			{
 				_id: params.projectId,
 				"features._id": params.featureId,
-				"tasks._id": params.taskId,
 			},
-			{ $set: { "features.$.tasks.$": updatedTask } },
+			{ $set: { "features.$.tasks": newTaskArray } },
 			{ runValidators: true, new: true }
 		);
 
@@ -216,11 +219,10 @@ module.exports = {
 	},
 
 	// Delete task in feature
-	// NOT WORKING
 	async deleteTask({ params }, res) {
 		const project = await Project.findOneAndUpdate(
 			{ _id: params.projectId, "features._id": params.featureId },
-			{ $pull: { "features.$": { tasks: { _id: params.taskId } } } },
+			{ $pull: { "features.$.tasks": { _id: params.taskId } } },
 			{ new: true }
 		);
 
