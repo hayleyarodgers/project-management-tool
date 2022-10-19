@@ -1,19 +1,13 @@
 import React, { useState, useEffect } from "react";
 
 // Import bootstrap components
-import {
-  Jumbotron,
-  Container,
-  CardColumns,
-  Card,
-  Button,
-} from "react-bootstrap";
+import { Row, Col, Card } from "react-bootstrap";
 
 // Import Link component for all internal application hyperlinks
 import { Link } from "react-router-dom";
 
 // Import API calls
-import { getMe } from "../utils/API";
+import { getUser } from "../utils/API";
 import Auth from "../utils/auth";
 
 const TeamMemberDashboard = () => {
@@ -32,7 +26,7 @@ const TeamMemberDashboard = () => {
           return false;
         }
 
-        const response = await getMe(token);
+        const response = await getUser(token);
 
         if (!response.ok) {
           throw new Error("Something went wrong.");
@@ -55,20 +49,20 @@ const TeamMemberDashboard = () => {
 
   return (
     <main>
-      <Jumbotron fluid className="text-light bg-dark">
-        <Container>
-          <h1>My team</h1>
-          <Link className="btn" to={`/myteam/addteammember`}>
-            Add team member
-          </Link>
-        </Container>
-      </Jumbotron>
-      <Container>
-        <h2>{userData.teamCount ? ` ` : "Add your first team member."}</h2>
-        <CardColumns>
-          {userData.teamMembers.map((teamMember) => {
-            return (
-              <Card key={teamMember._id} border="dark">
+      <h1>My team</h1>
+      <Link className="btn" to={`/myteam/addteammember`}>
+        Add team member
+      </Link>
+      <h2>
+        {userData.teamCount
+          ? ` `
+          : "Please add your first team member to get started."}
+      </h2>
+      <Row xs={1} md={2} className="g-4">
+        {userData.teamMembers.map((teamMember) => {
+          return (
+            <Col key={teamMember._id}>
+              <Card border="dark">
                 {teamMember.image ? (
                   <Card.Img
                     src={teamMember.image}
@@ -91,10 +85,10 @@ const TeamMemberDashboard = () => {
                   </Link>
                 </Card.Body>
               </Card>
-            );
-          })}
-        </CardColumns>
-      </Container>
+            </Col>
+          );
+        })}
+      </Row>
     </main>
   );
 };
