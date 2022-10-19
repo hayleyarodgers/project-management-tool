@@ -6,8 +6,6 @@ import Nav from "./components/Nav";
 import Footer from "./components/Footer";
 
 import Home from "./pages/Home";
-import Login from "./pages/Login";
-import Signup from "./pages/Signup";
 import TeamMemberDashboard from "./pages/TeamMemberDashboard";
 import TeamMemberCreate from "./pages/TeamMemberCreate";
 import TeamMember from "./pages/TeamMember";
@@ -23,8 +21,6 @@ function App() {
         <Nav />
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route exact path="/login" component={Login} />
-          <Route exact path="/signup" component={Signup} />
           <Route exact path="/myteam" component={TeamMemberDashboard} />
           <Route
             exact
