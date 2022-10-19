@@ -1,57 +1,50 @@
 import React from "react";
-import {
-	ApolloClient,
-	InMemoryCache,
-	ApolloProvider,
-	createHttpLink,
-} from "@apollo/client";
-import { setContext } from "@apollo/client/link/context";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 // Import components
-import SearchBooks from "./pages/SearchBooks";
-import SavedBooks from "./pages/SavedBooks";
-import Navbar from "./components/Navbar";
+import Nav from "./components/Nav";
+import Footer from "./components/Footer";
 
-// Construct our main GraphQL API endpoint
-const httpLink = createHttpLink({
-	uri: "/graphql",
-});
-
-// Construct request middleware that will attach the JWT token to every request as an `authorization` header
-const authLink = setContext((_, { headers }) => {
-	// Get the authentication token from local storage if it exists
-	const token = localStorage.getItem("id_token");
-	// Return the headers to the context so httpLink can read them
-	return {
-		headers: {
-			...headers,
-			authorization: token ? `Bearer ${token}` : "",
-		},
-	};
-});
-
-// Set up our client to execute the `authLink` middleware prior to making the request to our GraphQL API
-const client = new ApolloClient({
-	link: authLink.concat(httpLink),
-	cache: new InMemoryCache(),
-});
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+import TeamMemberDashboard from "./pages/TeamMemberDashboard";
+import TeamMemberCreate from "./pages/TeamMemberCreate";
+import TeamMember from "./pages/TeamMember";
+import ProjectDashboard from "./pages/ProjectDashboard";
+import ProjectCreate from "./pages/ProjectCreate";
+import Project from "./pages/Project";
+import NoMatch from "./pages/NoMatch";
 
 function App() {
-	return (
-		<ApolloProvider client={client}>
-			<Router>
-				<>
-					<Navbar />
-					<Switch>
-						<Route exact path="/" component={SearchBooks} />
-						<Route exact path="/saved" component={SavedBooks} />
-						<Route render={() => <h1 className="display-2">Wrong page!</h1>} />
-					</Switch>
-				</>
-			</Router>
-		</ApolloProvider>
-	);
+  return (
+    <Router>
+      <>
+        <Nav />
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/signup" component={Signup} />
+          <Route exact path="/myteam" component={TeamMemberDashboard} />
+          <Route
+            exact
+            path="/myteam/addteammember"
+            component={TeamMemberCreate}
+          />
+          <Route exact path="/myteam/:teamMemberId" component={TeamMember} />
+          <Route exact path="/myprojects" component={ProjectDashboard} />
+          <Route
+            exact
+            path="/myprojects/addproject"
+            component={ProjectCreate}
+          />
+          <Route exact path="/myprojects/:projectId" component={Project} />
+          <Route path="*" component={NoMatch} />
+        </Switch>
+        <Footer />
+      </>
+    </Router>
+  );
 }
 
 export default App;
