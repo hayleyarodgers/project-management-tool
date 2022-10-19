@@ -4,6 +4,7 @@ import { Form, Button, Alert } from "react-bootstrap";
 
 import { loginUser } from "../utils/API";
 import Auth from "../utils/auth";
+import { saveUserId } from "../utils/localStorage";
 
 const LoginForm = () => {
   // Set initial form state
@@ -41,6 +42,7 @@ const LoginForm = () => {
 
       const { token, user } = await response.json();
       console.log(user);
+      saveUserId(user._id);
       Auth.login(token);
     } catch (err) {
       console.error(err);
