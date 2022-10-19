@@ -26,10 +26,20 @@ const userSchema = new Schema(
 			type: String,
 			required: true,
 		},
-		// Array of projects created by a user
-		projects: [projectSchema],
-		// Array of people on a user's team
-		teamMembers: [teamMemberSchema],
+		// Array of ids of projects created by a user
+		projects: [
+			{
+				type: Schema.Types.ObjectId,
+				ref: "Project",
+			},
+		],
+		// Array of ids of people on a user's team
+		teamMembers: [
+			{
+				type: Schema.Types.ObjectId,
+				ref: "User",
+			},
+		],
 		// For multi-user application in future development
 		role: {
 			type: Schema.Types.ObjectId,
