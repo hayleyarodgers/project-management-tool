@@ -45,7 +45,7 @@ module.exports = {
 		}
 
 		// Check password
-		const correctPw = await User.isCorrectPassword(body.password);
+		const correctPw = await user.isCorrectPassword(body.password);
 
 		if (!correctPw) {
 			return res.status(400).json({ message: "Wrong password." });
