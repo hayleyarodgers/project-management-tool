@@ -154,7 +154,7 @@ export const getAllFeatures = (projectId, token) => {
 };
 
 // Route to get a feature in a project (user must be logged in)
-export const getFeature = (projectId, token) => {
+export const getFeature = (projectId, featureId, token) => {
   return fetch(`/api/projects/${projectId}/features/${featureId}`, {
     method: "GET",
     headers: {
@@ -227,7 +227,7 @@ export const getTask = (projectId, featureId, taskId, token) => {
 };
 
 // Route to create feature (user must be logged in)
-export const createTask = (projectId, taskData, token) => {
+export const createTask = (projectId, featureId, taskData, token) => {
   return fetch(`/api/projects/${projectId}/features/${featureId}/tasks`, {
     method: "POST",
     headers: {
