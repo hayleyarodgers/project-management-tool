@@ -36,7 +36,7 @@ module.exports = {
 
 		// Add team member to the team of the person creating this user (manager)
 		const manager = await User.findOneAndUpdate(
-			{ _id: body.managerId },
+			{ _id: body.manager },
 			{ $addToSet: { teamMembers: teamMember._id } },
 			{ new: true }
 		);
