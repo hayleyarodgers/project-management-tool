@@ -1,4 +1,6 @@
 const { Schema, model } = require("mongoose");
+const projectSchema = require("./Project");
+const teamMemberSchema = require("./TeamMember");
 const bcrypt = require("bcrypt");
 
 // Schema to create User model
@@ -24,20 +26,10 @@ const userSchema = new Schema(
 			type: String,
 			required: true,
 		},
-		// Array of ids of projects created by a user
-		projects: [
-			{
-				type: Schema.Types.ObjectId,
-				ref: "Project",
-			},
-		],
-		// Array of ids of people on a user's team
-		teamMembers: [
-			{
-				type: Schema.Types.ObjectId,
-				ref: "User",
-			},
-		],
+		// Array of projects created by a user
+		projects: [projectSchema],
+		// Array of people on a user's team
+		teamMembers: [teamMemberSchema],
 		// For multi-user application in future development
 		role: {
 			type: Schema.Types.ObjectId,
