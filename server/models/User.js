@@ -37,14 +37,14 @@ const userSchema = new Schema(
 		teamMembers: [
 			{
 				type: Schema.Types.ObjectId,
-				ref: "User",
+				ref: "TeamMember",
 			},
 		],
 		// For multi-user application in future development
-		role: {
-			type: Schema.Types.ObjectId,
-			ref: "Role",
-		},
+		// role: {
+		// 	type: Schema.Types.ObjectId,
+		// 	ref: "Role",
+		// },
 	},
 	// Allow use of virtuals below
 	{

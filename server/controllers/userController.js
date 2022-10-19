@@ -11,7 +11,9 @@ module.exports = {
 				{ _id: user ? user._id : params.id },
 				{ username: params.username },
 			],
-		});
+		})
+			.populate("teamMembers")
+			.populate("projects");
 
 		if (!foundUser) {
 			return res.status(400).json({ message: "No user with that id." });
