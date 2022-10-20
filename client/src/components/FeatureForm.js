@@ -14,7 +14,7 @@ const FeatureForm = ({ teamMembers }) => {
   const [featureFormData, setFeatureFormData] = useState({
     featureName: "",
     featureDescription: "",
-    featureMustHave: true,
+    featureMustHave: "",
     featureAssignee: "",
   });
 
@@ -63,7 +63,7 @@ const FeatureForm = ({ teamMembers }) => {
     setFeatureFormData({
       featureName: "",
       featureDescription: "",
-      featureMustHave: true,
+      featureMustHave: "",
       featureAssignee: "",
     });
 
@@ -123,7 +123,7 @@ const FeatureForm = ({ teamMembers }) => {
           onChange={handleInputChange}
           value={featureFormData.featureMustHave}
           required>
-          <option>Choose an option</option>
+          <option defaultValue>Choose an option</option>
           <option value="true">Yes</option>
           <option value="false">No</option>
         </Form.Select>
@@ -139,7 +139,7 @@ const FeatureForm = ({ teamMembers }) => {
           onChange={handleInputChange}
           value={featureFormData.featureAssignee}
           required>
-          <option>Choose an option</option>
+          <option defaultValue>Choose an option</option>
           {teamMembers &&
             teamMembers.map((teamMember) => (
               <option key={teamMember._id} value={teamMember._id}>
