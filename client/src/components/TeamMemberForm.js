@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
+
 import { Form, Button, Alert } from "react-bootstrap";
 
 import { createTeamMember } from "../utils/API";
@@ -12,28 +14,15 @@ const TeamMemberForm = () => {
     role: "",
     efficiency: "",
     hoursPerWeek: "",
-    manager: "634faf8d70a461ddd2a459cf",
+    manager: getSavedUserId(),
   });
+
+  const history = useHistory();
 
   // Set state for form validation
   const [validated] = useState(false);
   // Set state for alert
   const [showAlert, setShowAlert] = useState(false);
-
-  // Set managerId on page load
-  // NOT WORKING
-  // useEffect(() => {
-  //   const setManager = () => {
-  //     const value = getSavedUserId();
-  //     console.log(value);
-  //     const updatedObject = { ...teamMemberFormData, manager: value };
-  //     console.log(updatedObject);
-  //     setTeamMemberFormData(updatedObject);
-  //     console.log(teamMemberFormData);
-  //   };
-  //   setManager();
-  //   // When teamMemberFormData in array below, it successfully updates state but goes over and over again
-  // }, []);
 
   // Set form data when input of any form field changes
   const handleInputChange = (event) => {
@@ -79,6 +68,8 @@ const TeamMemberForm = () => {
       efficiency: "",
       hoursPerWeek: "",
     });
+
+    history.push("/myteam");
   };
 
   return (
@@ -162,16 +153,7 @@ const TeamMemberForm = () => {
         <Form.Control type="file" />
       </Form.Group> */}
 
-      <Button
-        disabled={
-          !(
-            teamMemberFormData.username &&
-            teamMemberFormData.role &&
-            teamMemberFormData.efficiency
-          )
-        }
-        type="submit"
-        variant="success">
+      <Button type="submit" variant="success">
         Create
       </Button>
     </Form>
