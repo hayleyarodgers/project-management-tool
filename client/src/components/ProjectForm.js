@@ -17,8 +17,6 @@ const ProjectForm = () => {
     projectManager: getSavedUserId(),
   });
 
-  const history = useHistory();
-
   // Set state for form validation
   const [validated] = useState(false);
   // Set state for alert
@@ -66,12 +64,13 @@ const ProjectForm = () => {
       projectDescription: "",
       projectUserStory: "",
       // projectTeamMembers: [],
-      projectManager: "634faf8d70a461ddd2a459cf",
+      projectManager: getSavedUserId(),
     });
 
     // NOT WORKING
     // Want to go to something with newly created Id...
     // history.push("/myprojects/:projectId/features");
+    const history = useHistory();
     history.push("/myprojects");
   };
 
