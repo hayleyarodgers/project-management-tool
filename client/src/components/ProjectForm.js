@@ -41,12 +41,12 @@ const ProjectForm = () => {
     setProjectFormData({ ...projectFormData, [name]: value });
   };
 
-  // Create new team member
+  // Create new project
   const handleFormSubmit = async (event) => {
     // Stop page refresh
     event.preventDefault();
 
-    // Check token before proceeding to create new team member
+    // Check token before proceeding to create new project
     const token = Auth.loggedIn() ? Auth.getToken() : null;
 
     if (!token) {
