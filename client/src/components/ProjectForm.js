@@ -8,6 +8,8 @@ import Auth from "../utils/auth";
 import { getSavedUserId } from "../utils/localStorage";
 
 const ProjectForm = () => {
+  const history = useHistory();
+
   // Set initial form state
   const [projectFormData, setProjectFormData] = useState({
     projectName: "",
@@ -54,24 +56,23 @@ const ProjectForm = () => {
       if (!response.ok) {
         throw new Error("Something went wrong when creating project.");
       }
+
+      const project = await response.json();
+      const projectId = project._id;
+
+      setProjectFormData({
+        projectName: "",
+        projectDescription: "",
+        projectUserStory: "",
+        // projectTeamMembers: [],
+        projectManager: getSavedUserId(),
+      });
+
+      history.push(`/myprojects/${projectId}/features`);
     } catch (err) {
       console.error(err);
       setShowAlert(true);
     }
-
-    setProjectFormData({
-      projectName: "",
-      projectDescription: "",
-      projectUserStory: "",
-      // projectTeamMembers: [],
-      projectManager: getSavedUserId(),
-    });
-
-    // NOT WORKING
-    // Want to go to something with newly created Id...
-    // history.push("/myprojects/:projectId/features");
-    // const history = useHistory();
-    // history.push("/myprojects");
   };
 
   return (
@@ -134,16 +135,7 @@ SO THAT...`}
         </Form.Control.Feedback>
       </Form.Group>
 
-      <Button
-        disabled={
-          !(
-            projectFormData.projectName &&
-            projectFormData.projectDescription &&
-            projectFormData.projectUserStory
-          )
-        }
-        type="submit"
-        variant="success">
+      <Button type="submit" variant="success">
         Create
       </Button>
     </Form>
