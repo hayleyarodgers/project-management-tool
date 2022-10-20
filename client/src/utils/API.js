@@ -46,6 +46,17 @@ export const getAllManagersTeamMembers = (token) => {
   });
 };
 
+// Route to get a team member (user must be logged in)
+export const getTeamMember = (teamMemberId, token) => {
+  return fetch(`/api/team/${teamMemberId}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
+    },
+  });
+};
+
 // Route to create team member (user must be logged in)
 export const createTeamMember = (teamMemberData, token) => {
   return fetch("/api/team", {

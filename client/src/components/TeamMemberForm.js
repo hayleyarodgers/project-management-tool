@@ -11,6 +11,7 @@ const TeamMemberForm = () => {
     username: "",
     role: "",
     efficiency: "",
+    hoursPerWeek: "",
     manager: "634faf8d70a461ddd2a459cf",
   });
 
@@ -76,6 +77,7 @@ const TeamMemberForm = () => {
       username: "",
       role: "",
       efficiency: "",
+      hoursPerWeek: "",
     });
   };
 
@@ -137,6 +139,21 @@ const TeamMemberForm = () => {
         />
         <Form.Control.Feedback type="invalid" muted>
           Please add an efficiency estimate.
+        </Form.Control.Feedback>
+      </Form.Group>
+
+      <Form.Group className="mb-3">
+        <Form.Label htmlFor="hoursPerWeek">Hours/week</Form.Label>
+        <Form.Control
+          type="text"
+          placeholder="Number of hours/week"
+          name="hoursPerWeek"
+          onChange={handleInputChange}
+          value={teamMemberFormData.hoursPerWeek}
+          required
+        />
+        <Form.Control.Feedback type="invalid" muted>
+          Please add an hours per week estimate.
         </Form.Control.Feedback>
       </Form.Group>
 

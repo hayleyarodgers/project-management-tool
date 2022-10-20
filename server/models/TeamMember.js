@@ -17,6 +17,10 @@ const teamMemberSchema = new Schema(
 			type: Number,
 			required: true,
 		},
+		hoursPerWeek: {
+			type: Number,
+			required: true,
+		},
 		manager: {
 			type: Schema.Types.ObjectId,
 			ref: "User",
