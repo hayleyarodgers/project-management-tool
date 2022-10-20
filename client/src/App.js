@@ -11,6 +11,8 @@ import TeamMemberCreate from "./pages/TeamMemberCreate";
 import TeamMember from "./pages/TeamMember";
 import ProjectDashboard from "./pages/ProjectDashboard";
 import ProjectCreate from "./pages/ProjectCreate";
+import ProjectFeatures from "./pages/ProjectFeatures";
+import ProjectTasks from "./pages/ProjectTasks";
 import Project from "./pages/Project";
 import NoMatch from "./pages/NoMatch";
 
@@ -35,6 +37,16 @@ function App() {
             component={ProjectCreate}
           />
           <Route exact path="/myprojects/:projectId" component={Project} />
+          <Route
+            exact
+            path="/myprojects/:projectId/features"
+            component={ProjectFeatures}
+          />
+          <Route
+            exact
+            path="/myprojects/:projectId/features/:featureId"
+            component={ProjectTasks}
+          />
           <Route path="*" component={NoMatch} />
         </Switch>
         <Footer />
