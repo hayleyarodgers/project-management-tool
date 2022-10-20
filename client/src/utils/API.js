@@ -214,7 +214,7 @@ export const deleteFeature = (projectId, featureId, token) => {
 
 // Route to get all tasks in a feature (user must be logged in)
 export const getAllTasks = (projectId, featureId, token) => {
-  return fetch(`/api/projects/${projectId}/features/${featureId}`, {
+  return fetch(`/api/projects/${projectId}/features/${featureId}/tasks`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
