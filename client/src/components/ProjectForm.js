@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
+
 import { Form, Button, Alert } from "react-bootstrap";
 
 import { createProject } from "../utils/API";
@@ -12,28 +14,15 @@ const ProjectForm = () => {
     projectDescription: "",
     projectUserStory: "",
     // projectTeamMembers: [],
-    projectManager: "634faf8d70a461ddd2a459cf",
+    projectManager: getSavedUserId(),
   });
+
+  const history = useHistory();
 
   // Set state for form validation
   const [validated] = useState(false);
   // Set state for alert
   const [showAlert, setShowAlert] = useState(false);
-
-  // Set projectManager on page load
-  // NOT WORKING
-  // useEffect(() => {
-  //   const setManager = () => {
-  //     const value = getSavedUserId();
-  //     console.log(value);
-  //     const updatedObject = { ...projectFormData, manager: value };
-  //     console.log(updatedObject);
-  //     setProjectFormData(updatedObject);
-  //     console.log(projectFormData);
-  //   };
-  //   setManager();
-  //   // When projectFormData in array below, it successfully updates state but goes over and over again
-  // }, []);
 
   // Set form data when input of any form field changes
   const handleInputChange = (event) => {
@@ -79,6 +68,11 @@ const ProjectForm = () => {
       // projectTeamMembers: [],
       projectManager: "634faf8d70a461ddd2a459cf",
     });
+
+    // NOT WORKING
+    // Want to go to something with newly created Id...
+    // history.push("/myprojects/:projectId/features");
+    history.push("/myprojects");
   };
 
   return (
