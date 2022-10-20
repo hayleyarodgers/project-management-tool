@@ -39,7 +39,7 @@ module.exports = {
 
 		// Add project to list of those created by the current user (manager)
 		const user = await User.findOneAndUpdate(
-			{ _id: body.managerId },
+			{ _id: body.projectManager },
 			{ $addToSet: { projects: project._id } },
 			{ new: true }
 		);
