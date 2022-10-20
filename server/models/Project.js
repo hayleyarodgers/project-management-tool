@@ -59,19 +59,19 @@ projectSchema.virtual("featureCount").get(function () {
 	return this.features.length;
 });
 
-// Create a virtual property "projectTimeEstimate" that gets the total estimated time for of all this project's features
-projectSchema.virtual("projectTimeEstimate").get(function () {
-	const featureTimeEstimateArray = [0];
+// Create a virtual property "projectRawTimeEstimate" that gets the total estimated time for of all this project's features
+projectSchema.virtual("projectRawTimeEstimate").get(function () {
+	const featureRawTimeEstimateArray = [0];
 
 	for (let i = 0; i < this.features.length; i++) {
-		featureTimeEstimateArray.push(this.features[i].featureTimeEstimate);
+		featureRawTimeEstimateArray.push(this.features[i].featureRawTimeEstimate);
 	}
 
 	const getSum = (total, num) => {
 		return total + num;
 	};
 
-	return featureTimeEstimateArray.reduce(getSum);
+	return featureRawTimeEstimateArray.reduce(getSum);
 });
 
 const Project = model("Project", projectSchema);
