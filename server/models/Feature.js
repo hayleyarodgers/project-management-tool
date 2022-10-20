@@ -25,9 +25,8 @@ const featureSchema = new Schema(
 			default: true,
 		},
 		featureAssignee: {
-			type: String,
-			required: true,
-			trim: true,
+			type: Schema.Types.ObjectId,
+			ref: "TeamMember",
 		},
 		featureCreatedAt: {
 			type: Date,
@@ -54,19 +53,19 @@ featureSchema.virtual("taskCount").get(function () {
 	return this.tasks.length;
 });
 
-// Create a virtual property "featureTimeEstimate" that gets the total estimated time for of all this feature's tasks
-featureSchema.virtual("featureTimeEstimate").get(function () {
-	const taskTimeEstimateArray = [0];
+// Create a virtual property "featureRawTimeEstimate" that gets the total estimated time for of all this feature's tasks
+featureSchema.virtual("featureRawTimeEstimate").get(function () {
+	const taskRawTimeEstimateArray = [0];
 
 	for (let i = 0; i < this.tasks.length; i++) {
-		taskTimeEstimateArray.push(this.tasks[i].taskTimeEstimate);
+		taskRawTimeEstimateArray.push(this.tasks[i].taskTimeEstimate);
 	}
 
 	const getSum = (total, num) => {
 		return total + num;
 	};
 
-	return taskTimeEstimateArray.reduce(getSum);
+	return taskRawTimeEstimateArray.reduce(getSum);
 });
 
 module.exports = featureSchema;

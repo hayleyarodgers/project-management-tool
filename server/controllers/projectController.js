@@ -15,7 +15,10 @@ module.exports = {
 
 	// Get a project by its id
 	async getProject({ params }, res) {
-		const project = await Project.findOne({ _id: params.projectId });
+		const project = await Project.findOne({ _id: params.projectId }).populate({
+			path: "features",
+			populate: "featureAssignee",
+		});
 
 		if (!project) {
 			return res
@@ -90,7 +93,10 @@ module.exports = {
 
 	// Get one feature in project
 	async getFeature({ params }, res) {
-		const project = await Project.findOne({ _id: params.projectId });
+		const project = await Project.findOne({ _id: params.projectId }).populate({
+			path: "features",
+			populate: "featureAssignee",
+		});
 		const feature = project.features.id(params.featureId);
 
 		if (!feature) {
