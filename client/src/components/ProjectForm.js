@@ -70,8 +70,8 @@ const ProjectForm = () => {
     // NOT WORKING
     // Want to go to something with newly created Id...
     // history.push("/myprojects/:projectId/features");
-    const history = useHistory();
-    history.push("/myprojects");
+    // const history = useHistory();
+    // history.push("/myprojects");
   };
 
   return (
