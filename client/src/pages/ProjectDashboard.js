@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 
 // Import bootstrap components
 import { Row, Col, Card } from "react-bootstrap";
+import "../styles/ProjectDashboard.css";
 
 // Import Link component for all internal application hyperlinks
 import { Link } from "react-router-dom";
@@ -49,42 +50,43 @@ const ProjectDashboard = () => {
 
   return (
     <main>
-      <h1>My projects</h1>
-      <Link className="btn" to={`/myprojects/addproject`}>
-        Add project
-      </Link>
-      <h2>
+      <div className="d-flex align-items-center">
+        <h2>My projects</h2>
+        <Link className="btn-create" to={`/myprojects/addproject`}>
+          +
+        </Link>
+      </div>
+      <p>
         {userData.projects.length
           ? `You have ${userData.projects.length} ${
               userData.projects.length === 1 ? "project" : "projects"
             }:`
           : "Please add your first project to get started!"}
-      </h2>
-      <Row xs={1} md={2} className="g-4">
+      </p>
+      <Row xs={1} md={3} className="g-4">
         {userData.projects.map((project) => {
           return (
-            <Col key={project._id}>
-              <Card border="dark">
-                {project.image ? (
-                  <Card.Img
-                    src={project.image}
-                    alt={`The cover for ${project.name}`}
-                    variant="top"
-                  />
-                ) : null}
-                <Card.Body>
-                  <Card.Title>{project.name}</Card.Title>
-                  <Card.Text>Placeholder</Card.Text>
-                  {/* <Button className='btn' onClick={() => handleUpdateTeamMember(teamMember._id)}>
-                  Update
-                  </Button>
-                  <Button className='btn' onClick={() => handleDeleteTeamMember(teamMember._id)}>
-                    Delete
-                  </Button> */}
-                  <Link className="btn" to={`/myprojects/${project._id}`}>
-                    See more
-                  </Link>
-                </Card.Body>
+            <Col key={project._id} className="container-fluid g-4">
+              <Card className="card border-0 d-flex text-center">
+                <Link
+                  to={`/myprojects/${project._id}`}
+                  className="parent-hover">
+                  <Card.Body>
+                    <Card.Title>
+                      <h3 className="un">{project.projectName}</h3>
+                    </Card.Title>
+                    <Card.Text className="text">Placeholder</Card.Text>
+                    {/* <Button className='btn' onClick={() => handleUpdateTeamMember(teamMember._id)}>
+                    Update
+                    </Button>
+                    <Button className='btn' onClick={() => handleDeleteTeamMember(teamMember._id)}>
+                      Delete
+                    </Button> */}
+                    <Card.Text className="btn btn-see-more">
+                      See more →
+                    </Card.Text>
+                  </Card.Body>
+                </Link>
               </Card>
             </Col>
           );

@@ -7,12 +7,15 @@
   --font-heading: 'Karla', sans-serif;
   --font-main: 'Inconsolata', monospace;
   --blue: #1233FF;
+  --orange: #ff6d00;
   --grey: rgb(85, 85, 85);
+  --light-grey: rgba(128, 128, 128, 0.105);
 }
 
 /* Custom font styling */
 body {
   color: white;
+  background-color: #f6f9ff;
   font-family: var(--font-main);
   font-weight: 400;
   font-size: 1.65rem;
@@ -38,7 +41,6 @@ h1 {
 
 h2 {
  font-size: 4.5rem;
- background-color: white;
  color: var(--blue);
  width: fit-content;
 }
@@ -53,17 +55,10 @@ form label {
   font-weight: 700;
 }
 
-a:hover,
-.nav-link:hover {
-  color: var(--orange);
-}
-
-.nav-link:focus {
-  color: var(--blue)
-}
-
-#existing-posts h3 {
-  color: white;
+a, 
+a:hover {
+  text-decoration: none;
+  color: var(--blue);
 }
 
 p,
@@ -81,46 +76,36 @@ p,
   font-size: 1.65rem;
 }
 
-a,
-a:hover {
-  text-decoration: none;
-  color: var(--blue);
-}
-
-
-
-hr {
-  margin: 25px 0px;
-}
-
 /* Custom card colour styling */
 
 
-.card {
-  background-color: var(--blue);
-}
-
 #existing-comments .card {
-  background-color: rgba(128, 128, 128, 0.105);
+  background-color: var(--light-grey);
 }
 
 /* Custom button styling */
-.btn-primary {
-  font-family: var(--font-heading);
-  font-size: 2rem;
+.btn {
+  font-size: 1.65rem;
   background-color: var(--blue);
   border: var(--blue);
 }
 
-#existing-posts .btn-primary {
-  background-color: white;
-  border: white;
-  color: var(--blue);
+.btn-create {
+  margin: 20px;
+  border-radius: 50%;
+  background-color: var(--light-grey);
+  text-align: center;
+  font-size: 6rem;
+  width: 50px;
+  height: 50px;
+  line-height: 0.8; 
 }
 
-.see-more-button,
-.update-comment-button,
-.delete-comment-button {
+a.btn-create:hover {
+  color: var(--orange)
+}
+
+.btn-see-more {
   background-color: white;
   border: white;
   color: var(--grey);
@@ -138,6 +123,7 @@ hr {
       background-position 0s 0.3s;
 }
 
+.parent-hover:hover .un, 
 .un:hover {
   background-position: 100% 100%; 
   background-size: 100% 2px;
