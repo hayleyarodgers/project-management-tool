@@ -12,8 +12,8 @@ const TeamMemberForm = () => {
   const [teamMemberFormData, setTeamMemberFormData] = useState({
     username: "",
     role: "",
-    efficiency: "",
-    hoursPerWeek: "",
+    efficiency: 1,
+    hoursPerWeek: 40,
     manager: getSavedUserId(),
   });
 
@@ -65,8 +65,8 @@ const TeamMemberForm = () => {
     setTeamMemberFormData({
       username: "",
       role: "",
-      efficiency: "",
-      hoursPerWeek: "",
+      efficiency: 1,
+      hoursPerWeek: 40,
     });
 
     history.push("/myteam");
@@ -122,13 +122,19 @@ const TeamMemberForm = () => {
       <Form.Group className="mb-3">
         <Form.Label htmlFor="efficiency">Efficiency</Form.Label>
         <Form.Control
-          type="text"
+          type="number"
           placeholder="New team member's efficiency"
           name="efficiency"
+          min="0"
+          max="3"
           onChange={handleInputChange}
           value={teamMemberFormData.efficiency}
           required
         />
+        <Form.Text muted>
+          Proportional to 1, such that 0 {"<"} 1 = faster than average, 1 =
+          average, {">"} 1 = slower than average.
+        </Form.Text>
         <Form.Control.Feedback type="invalid" muted>
           Please add an efficiency estimate.
         </Form.Control.Feedback>
@@ -137,9 +143,11 @@ const TeamMemberForm = () => {
       <Form.Group className="mb-3">
         <Form.Label htmlFor="hoursPerWeek">Hours/week</Form.Label>
         <Form.Control
-          type="text"
+          type="number"
           placeholder="Number of hours/week"
           name="hoursPerWeek"
+          min="0"
+          max="40"
           onChange={handleInputChange}
           value={teamMemberFormData.hoursPerWeek}
           required
