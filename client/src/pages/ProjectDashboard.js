@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 // Import bootstrap components
-import { Row, Col, Card } from "react-bootstrap";
+import { Row, Col, Card, Breadcrumb } from "react-bootstrap";
 import "../styles/ProjectDashboard.css";
 
 // Import Link component for all internal application hyperlinks
@@ -50,6 +50,12 @@ const ProjectDashboard = () => {
 
   return (
     <main>
+      <Breadcrumb>
+        <Breadcrumb.Item linkAs={Link} linkProps={{ to: "/" }}>
+          Home
+        </Breadcrumb.Item>
+        <Breadcrumb.Item active>My projects</Breadcrumb.Item>
+      </Breadcrumb>
       <div className="d-flex align-items-center">
         <h2>My projects</h2>
         <Link className="btn-create" to={`/myprojects/addproject`}>
