@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 
 // Import bootstrap components
-import { Row, Col, Card } from "react-bootstrap";
+import { Row, Col, Card, Breadcrumb } from "react-bootstrap";
+import profilePicture from "../assets/profile.png";
 
 // Import Link component for all internal application hyperlinks
 import { Link } from "react-router-dom";
@@ -49,29 +50,47 @@ const TeamMemberDashboard = () => {
 
   return (
     <main>
-      <h1>My team</h1>
-      <Link className="btn" to={`/myteam/addteammember`}>
-        Add team member
-      </Link>
-      <h2>
-        {userData.teamCount
-          ? ` `
-          : "Please add your first team member to get started."}
-      </h2>
-      <Row xs={1} md={2} className="g-4">
+      <Breadcrumb>
+        <Breadcrumb.Item linkAs={Link} linkProps={{ to: "/" }}>
+          Home
+        </Breadcrumb.Item>
+        <Breadcrumb.Item active>My team</Breadcrumb.Item>
+      </Breadcrumb>
+      <div className="d-flex align-items-center">
+        <h2>My team</h2>
+        <Link className="btn-create" to={`/myteam/addteammember`}>
+          +
+        </Link>
+      </div>
+      <p>
+        {userData.teamMembers.length
+          ? `You have ${userData.teamMembers.length} ${
+              userData.teamMembers.length === 1 ? "team member" : "team members"
+            }:`
+          : "Please add your first team member to get started!"}
+      </p>
+      <Row xs={1} sm={3} md={4} lg={5} className="g-4">
         {userData.teamMembers.map((teamMember) => {
           return (
-            <Col key={teamMember._id}>
-              <Card border="dark">
+            <Col key={teamMember._id} className="container-fluid g-4">
+              <Card className="card border-0 h-100 d-flex text-center">
                 {teamMember.image ? (
                   <Card.Img
                     src={teamMember.image}
                     alt={`The cover for ${teamMember.username}`}
                     variant="top"
                   />
-                ) : null}
+                ) : (
+                  <Card.Img
+                    src={profilePicture}
+                    alt={`The cover for ${teamMember.username}`}
+                    variant="top"
+                  />
+                )}
                 <Card.Body>
-                  <Card.Title>{teamMember.username}</Card.Title>
+                  <Card.Title>
+                    <h3>{teamMember.username}</h3>
+                  </Card.Title>
                   <Card.Text>{teamMember.role}</Card.Text>
                   <Card.Text>{teamMember.efficiency}</Card.Text>
                   {/* <Button className='btn' onClick={() => handleUpdateTeamMember(teamMember._id)}>

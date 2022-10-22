@@ -9,7 +9,7 @@
   --blue: #1233FF;
   --orange: #ff6d00;
   --grey: rgb(85, 85, 85);
-  --light-grey: rgba(128, 128, 128, 0.105);
+  --light-grey: #dbdde3;
 }
 
 /* Custom font styling */
@@ -34,8 +34,7 @@ main {
 h1,
 h2,
 h3,
-form label,
-.read-more {
+.form-label {
   font-family: var(--font-heading);
 }
 
@@ -76,16 +75,20 @@ p,
   color: white;
 }
 
-.form-control {
+.form-control, 
+.form-select {
   font-size: 1.65rem;
   border: none;
 }
 
-/* Custom card colour styling */
+.form-control, 
+.form-select,
+.card {
+  box-shadow: 0px 0 30px rgba(1, 41, 112, 0.08);
+}
 
-
-#existing-comments .card {
-  background-color: var(--light-grey);
+.card:hover {
+  box-shadow: 0px 0 30px rgba(1, 41, 112, 0.1);
 }
 
 /* Custom button styling */
@@ -99,7 +102,7 @@ p,
 .btn-create {
   margin: 20px;
   border-radius: 50%;
-  background-color: var(--light-grey);
+  background-color: white;
   text-align: center;
   font-size: 6rem;
   width: 50px;

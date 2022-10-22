@@ -105,6 +105,7 @@ const TeamMemberForm = () => {
           onChange={handleInputChange}
           value={teamMemberFormData.role}
           required>
+          <option defaultValue>Choose an option</option>
           <option>Senior back-end dev</option>
           <option>Senior front-end dev</option>
           <option>Senior full-stack dev</option>
