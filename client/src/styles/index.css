@@ -1,0 +1,146 @@
+/* Custom global styling */
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@300;700&family=Karla:wght@500&display=swap');
+
+/* Custom global styling */
+:root {
+  font-size: 62.5%;
+  --font-heading: 'Karla', sans-serif;
+  --font-main: 'Inconsolata', monospace;
+  --blue: #1233FF;
+  --grey: rgb(85, 85, 85);
+}
+
+/* Custom font styling */
+body {
+  color: white;
+  font-family: var(--font-main);
+  font-weight: 400;
+  font-size: 1.65rem;
+  line-height: 1.7;
+}
+
+main {
+  padding: 0 5rem;
+}
+
+h1,
+h2,
+h3,
+form label,
+.read-more {
+  font-family: var(--font-heading);
+}
+
+h1 {
+  font-family: var(--font-heading);
+  font-size: 6rem;
+}
+
+h2 {
+ font-size: 4.5rem;
+ background-color: white;
+ color: var(--blue);
+ width: fit-content;
+}
+
+h3, 
+form label {
+  color: var(--blue);
+  font-size: 2.5rem;
+}
+
+.active {
+  font-weight: 700;
+}
+
+a:hover,
+.nav-link:hover {
+  color: var(--orange);
+}
+
+.nav-link:focus {
+  color: var(--blue)
+}
+
+#existing-posts h3 {
+  color: white;
+}
+
+p,
+.blockquote-footer {
+  font-size: 1.65rem;
+  color: var(--grey);
+}
+
+.homepage p,
+.homepage .blockquote-footer {
+  color: white;
+}
+
+.form-control {
+  font-size: 1.65rem;
+}
+
+a,
+a:hover {
+  text-decoration: none;
+  color: var(--blue);
+}
+
+
+
+hr {
+  margin: 25px 0px;
+}
+
+/* Custom card colour styling */
+
+
+.card {
+  background-color: var(--blue);
+}
+
+#existing-comments .card {
+  background-color: rgba(128, 128, 128, 0.105);
+}
+
+/* Custom button styling */
+.btn-primary {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  background-color: var(--blue);
+  border: var(--blue);
+}
+
+#existing-posts .btn-primary {
+  background-color: white;
+  border: white;
+  color: var(--blue);
+}
+
+.see-more-button,
+.update-comment-button,
+.delete-comment-button {
+  background-color: white;
+  border: white;
+  color: var(--grey);
+}
+
+.un {
+  display: inline-block;
+  padding-bottom: 2px;
+  background-image: linear-gradient(rgb(255, 255, 255) 0 0);
+  background-position: 0 100%;
+  background-size: 0% 2px;
+  background-repeat: no-repeat;
+  transition:
+      background-size 0.3s,
+      background-position 0s 0.3s;
+}
+
+.un:hover {
+  background-position: 100% 100%; 
+  background-size: 100% 2px;
+}
+
+/* Viewport responses */
