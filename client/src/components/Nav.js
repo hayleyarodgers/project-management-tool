@@ -54,7 +54,7 @@ const AppNavbar = () => {
         <Tab.Container defaultActiveKey="login">
           <Modal.Header closeButton>
             <Modal.Title id="signup-modal">
-              <Nav variant="pills">
+              <Nav>
                 <Nav.Item>
                   <Nav.Link eventKey="login">Log in</Nav.Link>
                 </Nav.Item>

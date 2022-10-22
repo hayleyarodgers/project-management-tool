@@ -97,13 +97,9 @@ const LoginForm = () => {
             Please enter your password.
           </Form.Control.Feedback>
         </Form.Group>
+        <br />
 
-        <Button
-          disabled={!(userFormData.username && userFormData.password)}
-          type="submit"
-          variant="success">
-          Submit
-        </Button>
+        <Button type="submit">Submit</Button>
       </Form>
     </>
   );

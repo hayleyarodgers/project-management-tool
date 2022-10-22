@@ -111,8 +111,9 @@ p,
   line-height: 0.8; 
 }
 
+.nav-link.active,
 a.btn-create:hover {
-  color: var(--orange)
+  background-color: var(--orange)
 }
 
 .un {
