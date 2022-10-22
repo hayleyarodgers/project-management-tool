@@ -92,7 +92,8 @@ p,
 }
 
 /* Custom button styling */
-.btn {
+.btn, 
+.btn.btn-primary {
   font-size: 1.65rem;
   color: white;
   background-color: var(--blue);

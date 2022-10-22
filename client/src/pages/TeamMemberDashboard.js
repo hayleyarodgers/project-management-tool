@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 
 // Import bootstrap components
-import { Row, Col, Card, Breadcrumb } from "react-bootstrap";
+import { Row, Col, Card, Breadcrumb, Button } from "react-bootstrap";
 import profilePicture from "../assets/profile.png";
 
 // Import Link component for all internal application hyperlinks
 import { Link } from "react-router-dom";
 
 // Import API calls
-import { getUser } from "../utils/API";
+import { getUser, deleteTeamMember } from "../utils/API";
 import Auth from "../utils/auth";
 
 const TeamMemberDashboard = () => {
@@ -47,6 +47,33 @@ const TeamMemberDashboard = () => {
   if (!userDataLength) {
     return <h2>Loading...</h2>;
   }
+
+  const handleDeleteTeamMember = async (teamMemberId) => {
+    const token = Auth.loggedIn() ? Auth.getToken() : null;
+
+    if (!token) {
+      return false;
+    }
+
+    try {
+      const response = await deleteTeamMember(teamMemberId, token);
+
+      if (!response.ok) {
+        throw new Error("Something went wrong.");
+      }
+
+      const refetch = await getUser(token);
+
+      if (!refetch.ok) {
+        throw new Error("Something went wrong.");
+      }
+
+      const user = await refetch.json();
+      setUserData(user);
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   return (
     <main>
@@ -92,16 +119,20 @@ const TeamMemberDashboard = () => {
                     <h3>{teamMember.username}</h3>
                   </Card.Title>
                   <Card.Text>{teamMember.role}</Card.Text>
-                  <Card.Text>{teamMember.efficiency}</Card.Text>
-                  {/* <Button className='btn' onClick={() => handleUpdateTeamMember(teamMember._id)}>
-                  Update
-                  </Button>
-                  <Button className='btn' onClick={() => handleDeleteTeamMember(teamMember._id)}>
-                    Delete
-                  </Button> */}
-                  <Link className="btn" to={`/myteam/${teamMember._id}`}>
-                    See more
-                  </Link>
+                  <Card.Text>
+                    <b>{teamMember.efficiency}</b> efficiency,{" "}
+                    <b>{teamMember.hoursPerWeek}</b> hours/week
+                  </Card.Text>
+                  <div className="d-flex justify-content-around">
+                    <Link className="btn" to={`/myteam/${teamMember._id}`}>
+                      Update
+                    </Link>
+                    <Button
+                      className="btn"
+                      onClick={() => handleDeleteTeamMember(teamMember._id)}>
+                      Delete
+                    </Button>
+                  </div>
                 </Card.Body>
               </Card>
             </Col>

@@ -8,7 +8,7 @@ import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import TeamMemberDashboard from "./pages/TeamMemberDashboard";
 import TeamMemberCreate from "./pages/TeamMemberCreate";
-import TeamMember from "./pages/TeamMember";
+import TeamMemberUpdate from "./pages/TeamMemberUpdate";
 import ProjectDashboard from "./pages/ProjectDashboard";
 import ProjectCreate from "./pages/ProjectCreate";
 import ProjectFeatures from "./pages/ProjectFeatures";
@@ -29,7 +29,11 @@ function App() {
             path="/myteam/addteammember"
             component={TeamMemberCreate}
           />
-          <Route exact path="/myteam/:teamMemberId" component={TeamMember} />
+          <Route
+            exact
+            path="/myteam/:teamMemberId"
+            component={TeamMemberUpdate}
+          />
           <Route exact path="/myprojects" component={ProjectDashboard} />
           <Route
             exact
