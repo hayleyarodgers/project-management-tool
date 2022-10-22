@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Navbar, Nav, Container, Modal, Tab } from "react-bootstrap";
+import "../styles/Nav.css";
 import SignUpForm from "./SignupForm";
 import LoginForm from "./LoginForm";
 
@@ -12,10 +13,10 @@ const AppNavbar = () => {
 
   return (
     <>
-      <Navbar bg="dark" variant="dark" expand="lg">
+      <Navbar className="nav" variant="dark" expand="lg">
         <Container fluid>
-          <Navbar.Brand as={Link} to="/">
-            Pro
+          <Navbar.Brand className="brandName" as={Link} to="/">
+            <h1 className="un">Pro</h1>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="navbar" />
           <Navbar.Collapse id="navbar">
@@ -24,13 +25,15 @@ const AppNavbar = () => {
               {/* If user is not logged in, show log in or sign up */}
               {Auth.loggedIn() ? (
                 <>
-                  <Nav.Link as={Link} to="/myteam">
+                  <Nav.Link className="un px-4" as={Link} to="/myteam">
                     My team
                   </Nav.Link>
-                  <Nav.Link as={Link} to="/myprojects">
+                  <Nav.Link className="un px-4" as={Link} to="/myprojects">
                     My projects
                   </Nav.Link>
-                  <Nav.Link onClick={Auth.logout}>Log out</Nav.Link>
+                  <Nav.Link className="un px-4" onClick={Auth.logout}>
+                    Log out
+                  </Nav.Link>
                 </>
               ) : (
                 <Nav.Link onClick={() => setShowModal(true)}>
