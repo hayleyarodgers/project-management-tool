@@ -40,6 +40,7 @@ const ProjectTasks = () => {
     };
 
     getTaskData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [taskDataLength]);
 
   return (

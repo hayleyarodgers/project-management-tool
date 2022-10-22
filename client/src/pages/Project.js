@@ -63,6 +63,7 @@ const Project = () => {
     };
 
     getProjectData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [projectId]);
 
   return (

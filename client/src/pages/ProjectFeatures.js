@@ -42,6 +42,7 @@ const ProjectFeatures = () => {
     };
 
     getFeatureData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [featureDataLength]);
 
   // Get team member data
