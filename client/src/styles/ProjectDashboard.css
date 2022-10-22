@@ -1,12 +1,12 @@
-.card {
+.project {
   background-color: var(--blue);
   padding: 10px;
 }
 
-h3, .text {
+.project h3, .text {
   color: white;
 }
 
-.card:hover {
+.project:hover {
   background-color: var(--orange);
 }

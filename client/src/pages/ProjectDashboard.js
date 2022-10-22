@@ -73,7 +73,7 @@ const ProjectDashboard = () => {
         {userData.projects.map((project) => {
           return (
             <Col key={project._id} className="container-fluid g-4">
-              <Card className="card border-0 d-flex text-center">
+              <Card className="card project border-0 d-flex text-center">
                 <Link
                   to={`/myprojects/${project._id}`}
                   className="parent-hover">
