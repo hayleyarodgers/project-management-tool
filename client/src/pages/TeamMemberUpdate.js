@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams, useHistory, Link } from "react-router-dom";
 
 // Import bootstrap components
-import { Form, Button, Alert } from "react-bootstrap";
+import { Form, Button, Alert, Breadcrumb } from "react-bootstrap";
 
 // Import API calls
 import { getTeamMember, updateTeamMember } from "../utils/API";
@@ -93,6 +93,15 @@ const TeamMemberUpdate = () => {
 
   return (
     <main>
+      <Breadcrumb>
+        <Breadcrumb.Item linkAs={Link} linkProps={{ to: "/" }}>
+          Home
+        </Breadcrumb.Item>
+        <Breadcrumb.Item linkAs={Link} linkProps={{ to: "/myteam" }}>
+          My team
+        </Breadcrumb.Item>
+        <Breadcrumb.Item active>Update team member</Breadcrumb.Item>
+      </Breadcrumb>
       <h2>Update {teamMemberData.username}'s profile</h2>
       <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
         {/* Show alert if server response is bad */}
