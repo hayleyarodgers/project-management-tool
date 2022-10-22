@@ -7,9 +7,9 @@ const NotFound = () => {
 
   return (
     <div>
-      <h1>
+      <h2>
         No match for <code>{location.pathname}.</code>
-      </h1>
+      </h2>
     </div>
   );
 };

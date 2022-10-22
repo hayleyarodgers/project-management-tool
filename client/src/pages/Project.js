@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 
 // Import bootstrap components
-// import { Row, Col, Card } from "react-bootstrap";
+import { Breadcrumb } from "react-bootstrap";
 
 // Import Link component for all internal application hyperlinks
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 
 // Import API calls
@@ -68,42 +68,18 @@ const Project = () => {
 
   return (
     <main>
-      <h1>{project.projectName} page</h1>
+      <Breadcrumb>
+        <Breadcrumb.Item linkAs={Link} linkProps={{ to: "/" }}>
+          Home
+        </Breadcrumb.Item>
+        <Breadcrumb.Item linkAs={Link} linkProps={{ to: "/myprojects" }}>
+          My projects
+        </Breadcrumb.Item>
+        <Breadcrumb.Item active>{project.projectName}</Breadcrumb.Item>
+      </Breadcrumb>
+      <h2>{project.projectName} page</h2>
     </main>
   );
 };
 
 export default Project;
-
-// Want an object
-// {
-//   "username1": 32,
-//   "id459859845": 12,
-//   "id459859845": 2,
-//   "id346934868": 20,
-//   "id458745784": 10,
-// }
-// For each project.features
-// If project.features[i].featureMustHave = true
-// Get featureAssignee and featureAssigneeTimeEstimate
-// Push to object
-
-//Manager
-//634faf8d70a461ddd2a459cf
-
-//Teammembers
-// 6350a8ca8f6a9f522d10f30c
-// 6350a8d78f6a9f522d10f30f
-// 6350a8e88f6a9f522d10f312
-
-// const featureRawTimeEstimate = console.log(featureRawTimeEstimate);
-// const featureAssigneeEfficiency = this.featureAssignee.efficiency;
-// console.log(featureAssigneeEfficiency);
-
-// const featureAssigneeTimeEstimate =
-//   featureRawTimeEstimate * featureAssigneeEfficiency;
-// console.log(featureAssigneeTimeEstimate);
-// const featureAssigneeHours = this.featureAssignee.hoursPerWeek;
-// console.log(featureAssigneeHours);
-
-// return featureAssigneeTimeEstimate / featureAssigneeHours;
