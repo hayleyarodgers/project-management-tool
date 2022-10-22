@@ -111,12 +111,6 @@ a.btn-create:hover {
   color: var(--orange)
 }
 
-.btn-see-more {
-  background-color: white;
-  border: white;
-  color: var(--grey);
-}
-
 .un {
   display: inline-block;
   padding-bottom: 2px;
