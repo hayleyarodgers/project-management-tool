@@ -125,7 +125,7 @@ const TeamMemberForm = () => {
           type="number"
           placeholder="New team member's efficiency"
           name="efficiency"
-          min="0"
+          min="0.1"
           max="3"
           onChange={handleInputChange}
           value={teamMemberFormData.efficiency}
