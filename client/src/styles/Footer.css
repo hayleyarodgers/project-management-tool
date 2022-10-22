@@ -1,3 +1,7 @@
 footer h4, footer p {
   font-size: 1.4rem;
 }
+
+footer a:hover {
+  color: var(--blue)
+}
