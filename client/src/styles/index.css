@@ -98,6 +98,7 @@ p,
   color: white;
   background-color: var(--blue);
   border: var(--blue);
+  margin-top: 20px;
 }
 
 .btn-create {

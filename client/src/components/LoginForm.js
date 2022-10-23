@@ -97,7 +97,6 @@ const LoginForm = () => {
             Please enter your password.
           </Form.Control.Feedback>
         </Form.Group>
-        <br />
 
         <Button type="submit" variant="success">
           Submit
