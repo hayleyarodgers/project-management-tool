@@ -91,6 +91,10 @@ p,
   box-shadow: 0px 0 30px rgba(1, 41, 112, 0.1);
 }
 
+.card-body.feature {
+  background-color: var(--light-grey);
+}
+
 /* Custom button styling */
 .btn, 
 .btn.btn-primary {
@@ -98,7 +102,7 @@ p,
   color: white;
   background-color: var(--blue);
   border: var(--blue);
-  margin-top: 20px;
+  margin: 10px 0;
 }
 
 .btn-create {

@@ -128,7 +128,7 @@ const TeamMemberDashboard = () => {
                       className="btn"
                       variant="success"
                       to={`/myteam/${teamMember._id}`}>
-                      Update
+                      Edit
                     </Link>
                     <Button
                       className="btn"
