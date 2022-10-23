@@ -99,7 +99,9 @@ const LoginForm = () => {
         </Form.Group>
         <br />
 
-        <Button type="submit">Submit</Button>
+        <Button type="submit" variant="success">
+          Submit
+        </Button>
       </Form>
     </>
   );

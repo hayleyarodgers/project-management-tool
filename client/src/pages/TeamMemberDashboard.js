@@ -124,11 +124,15 @@ const TeamMemberDashboard = () => {
                     <b>{teamMember.hoursPerWeek}</b> hours/week
                   </Card.Text>
                   <div className="d-flex justify-content-around">
-                    <Link className="btn" to={`/myteam/${teamMember._id}`}>
+                    <Link
+                      className="btn"
+                      variant="success"
+                      to={`/myteam/${teamMember._id}`}>
                       Update
                     </Link>
                     <Button
                       className="btn"
+                      variant="success"
                       onClick={() => handleDeleteTeamMember(teamMember._id)}>
                       Delete
                     </Button>
