@@ -156,7 +156,15 @@ const ProjectFeatures = () => {
         </Breadcrumb.Item>
         <Breadcrumb.Item active>Add features</Breadcrumb.Item>
       </Breadcrumb>
-      <h2>Add features</h2>
+      <div className="d-flex feature justify-content-between align-items-center">
+        <h2>Add features</h2>
+        <Link
+          className="btn btn-important"
+          variant="success"
+          to={`/myprojects/${projectId}`}>
+          Finish creating project →
+        </Link>
+      </div>
       <p>Break down {projectData.projectName} into features.</p>
       <FeatureList
         projectId={projectId}

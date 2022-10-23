@@ -156,7 +156,15 @@ const ProjectTasks = () => {
         </Breadcrumb.Item>
         <Breadcrumb.Item active>Add tasks</Breadcrumb.Item>
       </Breadcrumb>
-      <h2>Add tasks</h2>
+      <div className="d-flex feature justify-content-between align-items-center">
+        <h2>Add tasks</h2>
+        <Link
+          className="btn btn-important"
+          variant="success"
+          to={`/myprojects/${projectId}`}>
+          Finish creating project →
+        </Link>
+      </div>
       <p>Break down {featureData.featureName} into tasks.</p>
       <TaskList
         projectId={projectId}
@@ -166,6 +174,7 @@ const ProjectTasks = () => {
         handleDeleteTask={handleDeleteTask}
       />
       <TaskForm projectId={projectId} featureId={featureId} />
+      <Link to={`/myprojects/${projectId}/features`}>← Back to features</Link>
     </main>
   );
 };

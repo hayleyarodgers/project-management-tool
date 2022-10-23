@@ -111,6 +111,11 @@ p {
   margin: 10px 0;
 }
 
+.btn.btn-important {
+  background-color: var(--orange);
+  border: var(--orange);
+}
+
 .btn-create {
   margin: 20px;
   border-radius: 50%;
