@@ -106,7 +106,7 @@ const ProjectForm = () => {
         <Form.Control
           as="textarea"
           rows={1}
-          placeholder="Project X's description."
+          placeholder="Project X's description"
           name="projectDescription"
           onChange={handleInputChange}
           value={projectFormData.projectDescription}

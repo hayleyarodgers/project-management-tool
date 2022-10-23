@@ -152,6 +152,7 @@ const TeamMemberForm = () => {
           value={teamMemberFormData.hoursPerWeek}
           required
         />
+        <Form.Text muted>Must be written in hours.</Form.Text>
         <Form.Control.Feedback type="invalid" muted>
           Please add an hours per week estimate.
         </Form.Control.Feedback>

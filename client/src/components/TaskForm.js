@@ -121,13 +121,17 @@ THEN...`}
         <Form.Label htmlFor="taskTimeEstimate">Time estimate (h)</Form.Label>
         <Form.Control
           type="number"
-          placeholder="Estimated time to complete task, eg. enter 10 for 10 hours"
+          placeholder="Estimated time to complete task"
           name="taskTimeEstimate"
           min="0"
           onChange={handleInputChange}
           value={taskFormData.taskTimeEstimate}
           required
         />
+        <Form.Text muted>
+          Must be written in hours in a decimal format, eg. for 10 hours and 30
+          minutes, enter 10.5.
+        </Form.Text>
         <Form.Control.Feedback type="invalid" muted>
           Please add a time estimate.
         </Form.Control.Feedback>

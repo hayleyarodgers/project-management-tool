@@ -88,9 +88,7 @@ const ProjectDashboard = () => {
                     <Button className='btn' onClick={() => handleDeleteTeamMember(teamMember._id)}>
                       Delete
                     </Button> */}
-                    <Card.Text className="btn btn-see-more">
-                      See more →
-                    </Card.Text>
+                    <Card.Text className="btn">See more →</Card.Text>
                   </Card.Body>
                 </Link>
               </Card>
