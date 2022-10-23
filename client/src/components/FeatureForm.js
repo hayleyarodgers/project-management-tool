@@ -1,13 +1,11 @@
 import React, { useState } from "react";
 import { Form, Button, Alert } from "react-bootstrap";
-import { useParams, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 import { createFeature } from "../utils/API";
 import Auth from "../utils/auth";
 
-const FeatureForm = ({ teamMembers }) => {
-  // Use `useParams()` to retrieve value of the route parameter `:projectId`
-  const { projectId } = useParams();
+const FeatureForm = ({ projectId, teamMembers }) => {
   const history = useHistory();
 
   // Set initial form state

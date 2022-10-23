@@ -163,7 +163,7 @@ const ProjectFeatures = () => {
         features={featureData}
         handleDeleteFeature={handleDeleteFeature}
       />
-      <FeatureForm teamMembers={teamMemberData} />
+      <FeatureForm projectId={projectId} teamMembers={teamMemberData} />
     </main>
   );
 };
