@@ -62,7 +62,7 @@ module.exports = {
 				{ _id: user ? user._id : params.id },
 				{ username: params.username },
 			],
-		});
+		}).populate("teamMembers");
 
 		const managersTeamMembers = manager.teamMembers;
 
