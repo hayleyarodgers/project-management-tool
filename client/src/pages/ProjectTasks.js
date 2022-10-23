@@ -161,6 +161,7 @@ const ProjectTasks = () => {
       <TaskList
         projectId={projectId}
         featureId={featureId}
+        featureMustHave={featureData.featureMustHave}
         tasks={taskData}
         handleDeleteTask={handleDeleteTask}
       />

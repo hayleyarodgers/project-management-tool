@@ -81,7 +81,10 @@ module.exports = {
 
 	// Get all features in project
 	async getAllFeatures({ params }, res) {
-		const project = await Project.findOne({ _id: params.projectId });
+		const project = await Project.findOne({ _id: params.projectId }).populate({
+			path: "features",
+			populate: "featureAssignee",
+		});
 		const allFeatures = project.features;
 
 		if (!allFeatures) {

@@ -7,9 +7,10 @@
   --font-heading: 'Karla', sans-serif;
   --font-main: 'Inconsolata', monospace;
   --blue: #1233FF;
-  --orange: #ff6d00;
+  --light-blue: #d3d9ff;
   --grey: rgb(85, 85, 85);
   --light-grey: #dbdde3;
+  --orange: #ff6d00;
 }
 
 /* Custom font styling */
@@ -64,8 +65,7 @@ a:hover {
   color: var(--blue);
 }
 
-p,
-.blockquote-footer {
+p {
   font-size: 1.65rem;
   color: var(--grey);
 }
@@ -94,6 +94,11 @@ p,
 .card-body.feature,
 .card-body.task {
   background-color: var(--light-grey);
+}
+
+.card-body.feature.musthave,
+.card-body.task.musthave {
+  background-color: var(--light-blue);
 }
 
 /* Custom button styling */
