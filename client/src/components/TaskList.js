@@ -1,28 +1,31 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
-const TaskList = ({ projectId, tasks }) => {
+// Import bootstrap components
+import { Card, Button } from "react-bootstrap";
+
+const TaskList = ({ projectId, featureId, tasks, handleDeleteTask }) => {
   if (!tasks.length) {
-    return <h3>No tasks yet</h3>;
+    return <></>;
   }
 
   return (
-    <div>
-      <div className="flex-row justify-space-between my-4">
-        {tasks &&
-          tasks.map((task) => (
-            <div key={task._id} className="col-12 col-xl-6">
-              <div className="card mb-3">
-                <h4 className="card-header bg-dark text-light p-2 m-0">
-                  {task.taskName}
-                </h4>
-              </div>
-            </div>
-          ))}
-      </div>
-      <Link className="btn" to={`/myprojects/${projectId}/features`}>
-        Go back to features.
-      </Link>
+    <div id="existing-tasks">
+      {tasks &&
+        tasks.map((task) => (
+          <Card key={task._id} className="card mb-3 border-0">
+            <Card.Body className="d-flex task justify-content-between align-items-center">
+              <h3 className="pl-2">{task.taskName}</h3>
+              <Button
+                className="btn mx-3"
+                variant="success"
+                onClick={() =>
+                  handleDeleteTask(projectId, featureId, task._id)
+                }>
+                Delete
+              </Button>
+            </Card.Body>
+          </Card>
+        ))}
     </div>
   );
 };

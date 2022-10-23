@@ -120,9 +120,10 @@ THEN...`}
       <Form.Group className="mb-3">
         <Form.Label htmlFor="taskTimeEstimate">Time estimate (h)</Form.Label>
         <Form.Control
-          type="text"
+          type="number"
           placeholder="Estimated time to complete task, eg. enter 10 for 10 hours"
           name="taskTimeEstimate"
+          min="0"
           onChange={handleInputChange}
           value={taskFormData.taskTimeEstimate}
           required

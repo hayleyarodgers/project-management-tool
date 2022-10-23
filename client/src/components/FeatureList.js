@@ -15,7 +15,7 @@ const FeatureList = ({ projectId, features, handleDeleteFeature }) => {
         features.map((feature) => (
           <Card key={feature._id} className="card mb-3 border-0">
             <Card.Body className="d-flex feature justify-content-between align-items-center">
-              <h3>{feature.featureName}</h3>
+              <h3 className="pl-2">{feature.featureName}</h3>
               <div>
                 <Link
                   className="btn mx-3"

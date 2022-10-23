@@ -91,7 +91,8 @@ p,
   box-shadow: 0px 0 30px rgba(1, 41, 112, 0.1);
 }
 
-.card-body.feature {
+.card-body.feature,
+.card-body.task {
   background-color: var(--light-grey);
 }
 
