@@ -1,30 +1,38 @@
 import React from "react";
+
+// Import bootstrap components
+import { Card, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-const FeatureList = ({ projectId, features }) => {
+const FeatureList = ({ projectId, features, handleDeleteFeature }) => {
   if (!features.length) {
-    return <h3>No features yet</h3>;
+    return <></>;
   }
 
   return (
-    <div>
-      <div className="flex-row justify-space-between my-4">
-        {features &&
-          features.map((feature) => (
-            <div key={feature._id} className="col-12 col-xl-6">
-              <div className="card mb-3">
-                <h4 className="card-header bg-dark text-light p-2 m-0">
-                  {feature.featureName}
-                </h4>
+    <div id="existing-features">
+      {features &&
+        features.map((feature) => (
+          <Card key={feature._id} className="card mb-3 border-0">
+            <Card.Body className="d-flex feature justify-content-between align-items-center">
+              <h3>{feature.featureName}</h3>
+              <div>
                 <Link
-                  className="btn"
+                  className="btn mx-3"
+                  variant="success"
                   to={`/myprojects/${projectId}/features/${feature._id}`}>
-                  Break this feature down into tasks.
+                  Add tasks
                 </Link>
+                <Button
+                  className="btn mx-3"
+                  variant="success"
+                  onClick={() => handleDeleteFeature(projectId, feature._id)}>
+                  Delete
+                </Button>
               </div>
-            </div>
-          ))}
-      </div>
+            </Card.Body>
+          </Card>
+        ))}
     </div>
   );
 };
