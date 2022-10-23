@@ -158,12 +158,14 @@ const ProjectFeatures = () => {
       </Breadcrumb>
       <div className="d-flex feature justify-content-between align-items-center">
         <h2>Add features</h2>
-        <Link
-          className="btn btn-important"
-          variant="success"
-          to={`/myprojects/${projectId}`}>
-          Finish creating project →
-        </Link>
+        {featureData.length >= 1 && featureData[0].tasks.length >= 1 ? (
+          <Link
+            className="btn btn-important"
+            variant="success"
+            to={`/myprojects/${projectId}`}>
+            Finish creating project →
+          </Link>
+        ) : null}
       </div>
       <p>Break down {projectData.projectName} into features.</p>
       <FeatureList
