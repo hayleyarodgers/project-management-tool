@@ -18,9 +18,13 @@ My goal for this project was to build a scalable, user-focused MERN application 
 
 I created **Pro**, a data-driven project management tool for software development teams. 
 
-Underscroping is the most common cause of bugs in software development. And yet, the most popular project management tools 
+After entering information about the people in your team and what they'll be working on, Pro produces an estimation for when a project will be complete. It also shows you when each person is expected to finish their part of the project, which can allow you to re-allocate people to different tasks to get a more even balance of work. 
 
-My motivation for creating this application was to
+![Screenshot of application](./assets/images/screenshot-of-application-project.png)
+
+### Motivation
+
+My motivation for creating this application is to help software development team managers plan accurately and allocate resources effectively to prevent underscoping—which is the most common cause of bugs. In doing this, user experience will be improved as more realiable features will be shipped at more reliable times.
 
 ### User Story
 
@@ -30,12 +34,23 @@ I WANT a data-driven project management tool
 SO THAT I can accurately predict project completion timelines.
 ```
 
-Currently, Pro achieves this by ___. Possible features that could be implemented in the future to improve the application include:
+Currently, Pro achieves this by using data entered by the user to predict when their project might be complete.
 
+In later interations, Pro will expand to become a comprehensive workflow management tool. 
+- The UI for project creation will become more intuitive—ideally a one-page interface instead of forms being split across multiple pages.
+- Instead of just being static placeholders, team members will have a separate user role and experience through the application. They will mark tasks as done, logging information about the task as they go.
+- With this data, Pro will learn:
+  - What team member's efficiencies are in practice
+  - And, how long certain types of tasks tend to take.
+- In turn, this will allow Pro to make more accurate estimations of project completion and potentially also suggestions of how to plan your projects to ensure success.
+
+Other future directions include:
+- Turning Pro into a PWA for offline use
+- And, using Stripe to accept payments, eg. when the team gets above a certain number of members.
 
 ### Tools and Technologies Used
 
-To create Pro, I used:
+To create Pro, the key technologies I used were:
 - React-Bootstrap
 - Node.js 
 - Express.js
@@ -55,8 +70,6 @@ To create Pro, I used:
 ![Screenshot of application](./assets/images/screenshot-of-application-team.png)
 
 ![Screenshot of application](./assets/images/screenshot-of-application-form.png)
-
-![Screenshot of application](./assets/images/screenshot-of-application-project.png)
 
 ### Wireframes of Application
 
@@ -99,7 +112,7 @@ I used:
 - A [MongoDB](https://www.mongodb.com/) database. 
 - [Mongoose](https://www.npmjs.com/package/mongoose) to connect and interact with my database.
 - [bcrypt](https://www.npmjs.com/package/bcrypt) package to hash passwords.
-- [JSON web tokens](https://www.npmjs.com/package/jsonwebtoken) and [jwt-decode]https://www.npmjs.com/package/jwt-decode) for authentication.
+- [JSON web tokens](https://www.npmjs.com/package/jsonwebtoken) and [jwt-decode](https://www.npmjs.com/package/jwt-decode) for authentication.
 - [Chart.js](https://www.chartjs.org/docs/latest/), [react-chartjs-2](https://react-chartjs-2.js.org/), [date-fns](https://date-fns.org/) and [chartjs-adapter-date-fns](https://www.npmjs.com/package/chartjs-adapter-date-fns) to create charts.
 - [This tutorial](https://blog.devgenius.io/using-chart-js-with-react-to-create-a-line-chart-showing-progress-over-time-3e34377b1391) to help me create charts.
 - Images from [Freepik](http://www.freepik.com), one designed by stories and another designed by vectorjuice.
