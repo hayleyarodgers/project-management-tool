@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 
 // Import bootstrap components
-import { Nav, Modal, Tab } from "react-bootstrap";
+import { Nav, Modal, Tab, Button } from "react-bootstrap";
 
-// Import bootstrap components
-import { Button } from "react-bootstrap";
+// Import Link component for all internal application hyperlinks
+import { Link } from "react-router-dom";
 
 // Import components
 import SignUpForm from "../components/SignupForm";
@@ -15,6 +15,9 @@ import "../styles/Home.css";
 
 // Import homepage image
 import home from "../assets/home.png";
+
+// Import authentication token function
+import Auth from "../utils/auth";
 
 const Home = () => {
   // Set modal display state
@@ -29,12 +32,24 @@ const Home = () => {
         The data-driven <b>project management tool</b> for software development
         teams.
       </p>
-      <Button
-        className="btn"
-        variant="success"
-        onClick={() => setShowModal(true)}>
-        Get started
-      </Button>
+      {Auth.loggedIn() ? (
+        <div className="d-flex justify-content-between">
+          <Link className="btn mx-3" to={`/myteam`}>
+            Go to your team
+          </Link>
+          <Link className="btn mx-3" to={`/myprojects`}>
+            Go to your projects
+          </Link>
+        </div>
+      ) : (
+        <Button
+          className="btn"
+          variant="success"
+          onClick={() => setShowModal(true)}>
+          Get started
+        </Button>
+      )}
+
       <img src={home} alt="Home" style={{ width: "65%", margin: "auto" }} />
       {/* Set modal data up */}
       <Modal
