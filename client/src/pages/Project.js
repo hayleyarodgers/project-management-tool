@@ -9,6 +9,7 @@ import { Link, useParams } from "react-router-dom";
 
 // Import components
 import ProjectChart from "../components/ProjectChart";
+import Delayed from "../components/Delayed";
 
 // Import API call and authentication token functions
 import { getProject } from "../utils/API";
@@ -124,11 +125,24 @@ const Project = () => {
         </Link>
       </div>
       {/* Chart displaying estimated project completion */}
-      <ProjectChart
-        projectId={projectId}
-        rawHourEstimates={rawHourEstimatesData}
-        modifiedWeekEstimates={modifiedWeekEstimatesData}
-      />
+      <h3>Projection</h3>
+      <Delayed>
+        <ProjectChart
+          projectId={projectId}
+          rawHourEstimates={rawHourEstimatesData}
+          modifiedWeekEstimates={modifiedWeekEstimatesData}
+        />
+      </Delayed>
+      <br />
+      <h3>Numbers not what you need?</h3>
+      <p>
+        Go back and edit your project. Consider changing features from "must
+        have" to "nice to have", and/or changing the assignees on different
+        features.
+      </p>
+      <Link className="btn" to={`/myprojects/${projectId}/features`}>
+        Edit project
+      </Link>
     </main>
   );
 };

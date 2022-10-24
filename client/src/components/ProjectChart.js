@@ -1,10 +1,16 @@
 import React from "react";
+
+// Import bootstrap components
 import { Container } from "react-bootstrap";
-import { Link } from "react-router-dom";
+
+// Import packages needed for creating a line-graph whose x-axis is time (in English)
 import { Chart as ChartJS, registerables } from "chart.js";
 import { Line } from "react-chartjs-2";
+import { format, addBusinessDays } from "date-fns";
 import "chartjs-adapter-date-fns";
 import { enGB } from "date-fns/locale";
+
+// Import helper function for getting random colour for graph
 import { getRandomColor } from "../utils/randomColourGenerator";
 
 ChartJS.register(...registerables);
@@ -14,13 +20,7 @@ const ProjectChart = ({
   rawHourEstimates,
   modifiedWeekEstimates,
 }) => {
-  console.log(rawHourEstimates);
-  console.log(modifiedWeekEstimates);
-
-  // get current date
-  // change modifiedWeekEstimates into weeks from now
-  // for each ---> push to an array twice, once for the data and again for the datasets
-
+  // Line graph customisation display
   const options = {
     animation: false,
     spanGaps: true,
@@ -29,7 +29,7 @@ const ProjectChart = ({
       y: {
         title: {
           display: true,
-          text: "Estimated time to complete feature (hours)",
+          text: "Estimated time to complete all assigned features (hours)",
         },
         grid: {
           display: false,
@@ -44,12 +44,15 @@ const ProjectChart = ({
         type: "time",
         distribution: "linear",
         time: {
-          parser: "yyyy-MM-dd",
-          unit: "week",
+          parser: "dd/MM/yyyy",
+          unit: "day",
         },
         title: {
           display: true,
           text: "Date",
+        },
+        grid: {
+          display: false,
         },
       },
     },
@@ -58,47 +61,46 @@ const ProjectChart = ({
     },
   };
 
+  const currentDate = format(new Date(), "dd/MM/yyyy");
+
+  const names = Object.keys(rawHourEstimates);
+
+  const getFinishDate = (name) => {
+    const weeks = modifiedWeekEstimates[name];
+    const days = Math.round(weeks * 5);
+    const completionDate = addBusinessDays(new Date(), days);
+    return format(completionDate, "dd/MM/yyyy");
+  };
+
+  const myDataSets = names.map((name) => {
+    return {
+      label: name,
+      data: [
+        { x: currentDate, y: rawHourEstimates[name] },
+        { x: getFinishDate(name), y: 0 },
+      ],
+      borderColor: getRandomColor(),
+      showLine: true,
+    };
+  });
+
   const data = {
-    datasets: [
-      {
-        label: "Annie",
-        data: [
-          { x: 0, y: 40 },
-          { x: 0.75, y: 0 },
-        ],
-        borderColor: getRandomColor(),
-        backgroundColor: getRandomColor(),
-        showLine: true,
-      },
-      {
-        label: "Anh",
-        data: [
-          { x: 0, y: 20 },
-          { x: 1, y: 0 },
-        ],
-        borderColor: getRandomColor(),
-        backgroundColor: getRandomColor(),
-        showLine: true,
-      },
-      {
-        label: "Annabelle",
-        data: [
-          { x: 0, y: 10 },
-          { x: 0.9, y: 0 },
-        ],
-        borderColor: getRandomColor(),
-        backgroundColor: getRandomColor(),
-        showLine: true,
-      },
-    ],
+    datasets: myDataSets,
+  };
+
+  const getLatestFinishDate = () => {
+    const data = Object.values(modifiedWeekEstimates);
+    const weeks = Math.max(...data);
+    const days = Math.round(weeks * 5);
+    const completionDate = addBusinessDays(new Date(), days);
+    return format(completionDate, "dd/MM/yyyy");
   };
 
   return (
     <>
-      <h3>Projection</h3>
       <p>
         Only taking "must-have" features into consideration, it's estimated that
-        this project will be complete on <b>this date</b>.
+        this project will be complete on <b>{getLatestFinishDate()}</b>.
       </p>
       <Container>
         <Line
@@ -108,16 +110,6 @@ const ProjectChart = ({
           datasetIdKey="id"
         />
       </Container>
-      <br />
-      <h3>Numbers not what you need?</h3>
-      <p>
-        Go back and edit your project. Consider changing features from "must
-        have" to "nice to have", and/or changing the assignees on different
-        features.
-      </p>
-      <Link className="btn" to={`/myprojects/${projectId}/features`}>
-        Edit project
-      </Link>
     </>
   );
 };
