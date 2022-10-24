@@ -140,16 +140,11 @@ p {
   line-height: 0.8; 
 }
 
-.nav-link.active {
-  background-color: var(--orange)
-}
-
+.nav-link.active,
+.btn.btn-success:active,
+.btn:hover,
 a.btn-create:hover {
   color: white;
-  background-color: var(--orange)
-}
-
-.btn.btn-success:active {
   background-color: var(--orange)
 }
 
