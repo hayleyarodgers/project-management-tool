@@ -18,7 +18,7 @@ My goal for this project was to build a scalable, user-focused MERN application 
 
 I created **Pro**, a data-driven project management tool for software development teams. 
 
-Underscroping is the most common cause of bugs in software development
+Underscroping is the most common cause of bugs in software development. And yet, the most popular project management tools 
 
 My motivation for creating this application was to
 
@@ -55,6 +55,12 @@ To create Pro, I used:
 ![Screenshot of application](./assets/images/screenshot-of-application-team.png)
 
 ![Screenshot of application](./assets/images/screenshot-of-application-form.png)
+
+![Screenshot of application](./assets/images/screenshot-of-application-project.png)
+
+### Wireframes of Application
+
+To see the wireframes for this project, see [here](./assets/wireframes/mvp/project-management-tool-mvp.pdf).
 
 ## Access
 

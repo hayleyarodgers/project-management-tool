@@ -89,8 +89,8 @@ const ProjectDashboard = () => {
                     <Card.Title>
                       <h3 className="un">{project.projectName}</h3>
                     </Card.Title>
-                    <Card.Text className="text">
-                      Estimated completion date: <span>2/2/23</span>
+                    <Card.Text class="text">
+                      {project.projectDescription}
                     </Card.Text>
                   </Card.Body>
                 </Link>

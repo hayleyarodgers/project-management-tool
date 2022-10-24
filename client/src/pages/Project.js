@@ -124,6 +124,10 @@ const Project = () => {
           Edit project
         </Link>
       </div>
+      <h3>Description</h3>
+      <p>{project.projectDescription}</p>
+      <h3>User story</h3>
+      <p>{project.projectUserStory}</p>
       {/* Chart displaying estimated project completion */}
       <h3>Projection</h3>
       <Delayed>

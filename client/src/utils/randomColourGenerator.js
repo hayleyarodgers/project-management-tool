@@ -1,15 +1,14 @@
 // Pick random colours for graph
 export const getRandomColor = () => {
   const colours = [
-    "#FF0000",
+    "#FF1233",
     "#FF8000",
-    "#FFFF00",
-    "#00FF00",
+    "#FFDE12",
+    "#12FF68",
     "#00FFFF",
     "#1233FF",
     "#7F00FF",
-    "#FF00FF",
-    "#FF007F",
+    "#FF12A9",
     "#000000",
     "#808080",
   ];
