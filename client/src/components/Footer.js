@@ -1,4 +1,6 @@
 import React from "react";
+
+// Import custom footer styles
 import "../styles/Footer.css";
 
 const Footer = () => {

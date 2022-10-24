@@ -1,13 +1,20 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
 
+// Import bootstrap components
 import { Form, Button, Alert } from "react-bootstrap";
 
+// Import `useHistory()` to access and edit browser history
+import { useHistory } from "react-router-dom";
+
+// Import API call, authentication token and getting saved userId to local storage functions
 import { createTeamMember } from "../utils/API";
 import Auth from "../utils/auth";
 import { getSavedUserId } from "../utils/localStorage";
 
 const TeamMemberForm = () => {
+  // Use `useHistory()` to access and edit browser history
+  const history = useHistory();
+
   // Set initial form state
   const [teamMemberFormData, setTeamMemberFormData] = useState({
     username: "",
@@ -16,15 +23,12 @@ const TeamMemberForm = () => {
     hoursPerWeek: 40,
     manager: getSavedUserId(),
   });
-
-  const history = useHistory();
-
   // Set state for form validation
   const [validated] = useState(false);
   // Set state for alert
   const [showAlert, setShowAlert] = useState(false);
 
-  // Set form data when input of any form field changes
+  // When the input of any form field changes, set form data
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setTeamMemberFormData({ ...teamMemberFormData, [name]: value });
@@ -35,7 +39,7 @@ const TeamMemberForm = () => {
     // Stop page refresh
     event.preventDefault();
 
-    // Check token before proceeding to create new team member
+    // Check token before proceeding
     const token = Auth.loggedIn() ? Auth.getToken() : null;
 
     if (!token) {
@@ -62,6 +66,7 @@ const TeamMemberForm = () => {
       setShowAlert(true);
     }
 
+    // Reset form data
     setTeamMemberFormData({
       username: "",
       role: "",
@@ -69,6 +74,7 @@ const TeamMemberForm = () => {
       hoursPerWeek: 40,
     });
 
+    // Go to team dashboard
     history.push("/myteam");
   };
 
@@ -83,6 +89,7 @@ const TeamMemberForm = () => {
         Something went wrong.
       </Alert>
 
+      {/* Team member username input */}
       <Form.Group className="mb-3">
         <Form.Label htmlFor="username">Username</Form.Label>
         <Form.Control
@@ -98,6 +105,7 @@ const TeamMemberForm = () => {
         </Form.Control.Feedback>
       </Form.Group>
 
+      {/* Team member role input */}
       <Form.Group className="mb-3">
         <Form.Label htmlFor="role">Role</Form.Label>
         <Form.Select
@@ -119,6 +127,7 @@ const TeamMemberForm = () => {
         </Form.Control.Feedback>
       </Form.Group>
 
+      {/* Team member efficiency input */}
       <Form.Group className="mb-3">
         <Form.Label htmlFor="efficiency">Efficiency</Form.Label>
         <Form.Control
@@ -140,6 +149,7 @@ const TeamMemberForm = () => {
         </Form.Control.Feedback>
       </Form.Group>
 
+      {/* Team member hours input */}
       <Form.Group className="mb-3">
         <Form.Label htmlFor="hoursPerWeek">Hours/week</Form.Label>
         <Form.Control
@@ -158,11 +168,13 @@ const TeamMemberForm = () => {
         </Form.Control.Feedback>
       </Form.Group>
 
+      {/* Future feature = allowing photo upload */}
       {/* <Form.Group className="mb-3" controlId="formImage">
         <Form.Label htmlFor="password">Image</Form.Label>
         <Form.Control type="file" />
       </Form.Group> */}
 
+      {/* On form submit, create team member */}
       <Button type="submit" variant="success">
         Create
       </Button>

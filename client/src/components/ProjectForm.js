@@ -1,13 +1,18 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
 
+// Import bootstrap components
 import { Form, Button, Alert } from "react-bootstrap";
 
+// Import `useHistory()` to access and edit browser history
+import { useHistory } from "react-router-dom";
+
+// Import API call, authentication token and saving userId to local storage functions
 import { createProject } from "../utils/API";
 import Auth from "../utils/auth";
 import { getSavedUserId } from "../utils/localStorage";
 
 const ProjectForm = () => {
+  // Use `useHistory()` to redirect to feature creation after form submit
   const history = useHistory();
 
   // Set initial form state
@@ -15,16 +20,14 @@ const ProjectForm = () => {
     projectName: "",
     projectDescription: "",
     projectUserStory: "",
-    // projectTeamMembers: [],
     projectManager: getSavedUserId(),
   });
-
   // Set state for form validation
   const [validated] = useState(false);
   // Set state for alert
   const [showAlert, setShowAlert] = useState(false);
 
-  // Set form data when input of any form field changes
+  // When the input of any form field changes, set form data
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setProjectFormData({ ...projectFormData, [name]: value });
@@ -35,7 +38,7 @@ const ProjectForm = () => {
     // Stop page refresh
     event.preventDefault();
 
-    // Check token before proceeding to create new project
+    // Check token before proceeding
     const token = Auth.loggedIn() ? Auth.getToken() : null;
 
     if (!token) {
@@ -60,14 +63,15 @@ const ProjectForm = () => {
       const project = await response.json();
       const projectId = project._id;
 
+      // Reset form data
       setProjectFormData({
         projectName: "",
         projectDescription: "",
         projectUserStory: "",
-        // projectTeamMembers: [],
         projectManager: getSavedUserId(),
       });
 
+      // Go to feature creation form
       history.push(`/myprojects/${projectId}/features`);
     } catch (err) {
       console.error(err);
@@ -86,6 +90,7 @@ const ProjectForm = () => {
         Something went wrong.
       </Alert>
 
+      {/* Project name input */}
       <Form.Group className="mb-3">
         <Form.Label htmlFor="projectName">Name</Form.Label>
         <Form.Control
@@ -101,6 +106,7 @@ const ProjectForm = () => {
         </Form.Control.Feedback>
       </Form.Group>
 
+      {/* Project description input */}
       <Form.Group className="mb-3">
         <Form.Label htmlFor="projectDescription">Description</Form.Label>
         <Form.Control
@@ -117,6 +123,7 @@ const ProjectForm = () => {
         </Form.Control.Feedback>
       </Form.Group>
 
+      {/* Project user story input */}
       <Form.Group className="mb-3">
         <Form.Label htmlFor="projectUserStory">User story</Form.Label>
         <Form.Control
@@ -135,6 +142,7 @@ SO THAT...`}
         </Form.Control.Feedback>
       </Form.Group>
 
+      {/* On form submit, create project */}
       <Button type="submit" variant="success">
         Create
       </Button>

@@ -2,18 +2,24 @@ import React from "react";
 
 // Import bootstrap components
 import { Card, Button } from "react-bootstrap";
+
+// Import Link component for all internal application hyperlinks
 import { Link } from "react-router-dom";
 
 const FeatureList = ({ projectId, features, handleDeleteFeature }) => {
+  // If no features, return nothing
   if (!features.length) {
     return <></>;
   }
 
   return (
-    <div id="existing-features">
+    <div>
+      {/* For each feature, render a card */}
       {features &&
         features.map((feature) => (
           <Card key={feature._id} className="card mb-3 border-0">
+            {/* If feature is a must have, render feature blue */}
+            {/* If feature is NOT a must have, render feature grey */}
             {feature.featureMustHave ? (
               <Card.Body className="d-flex feature musthave justify-content-between align-items-center">
                 <div className="pl-2">

@@ -1,10 +1,11 @@
 import React from "react";
+
+// Import router components
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 // Import components
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
-
 import Home from "./pages/Home";
 import TeamMemberDashboard from "./pages/TeamMemberDashboard";
 import TeamMemberCreate from "./pages/TeamMemberCreate";

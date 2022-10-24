@@ -1,11 +1,17 @@
 import React, { useState } from "react";
+
+// Import bootstrap components
 import { Form, Button, Alert } from "react-bootstrap";
+
+// Import `useHistory()` to access and edit browser history
 import { useHistory } from "react-router-dom";
 
+// Import API call and authentication token functions
 import { createTask } from "../utils/API";
 import Auth from "../utils/auth";
 
 const TaskForm = ({ projectId, featureId }) => {
+  // Use `useHistory()` to access and edit browser history
   const history = useHistory();
 
   // Set initial form state
@@ -14,13 +20,12 @@ const TaskForm = ({ projectId, featureId }) => {
     taskAcceptanceCriteria: "",
     taskTimeEstimate: 0,
   });
-
   // Set state for form validation
   const [validated] = useState(false);
   // Set state for alert
   const [showAlert, setShowAlert] = useState(false);
 
-  // Set form data when input of any form field changes
+  // When the input of any form field changes, set form data
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setTaskFormData({ ...taskFormData, [name]: value });
@@ -31,7 +36,7 @@ const TaskForm = ({ projectId, featureId }) => {
     // Stop page refresh
     event.preventDefault();
 
-    // Check token before proceeding to create new task
+    // Check token before proceeding
     const token = Auth.loggedIn() ? Auth.getToken() : null;
 
     if (!token) {
@@ -62,12 +67,14 @@ const TaskForm = ({ projectId, featureId }) => {
       setShowAlert(true);
     }
 
+    // Reset form data
     setTaskFormData({
       taskName: "",
       taskAcceptanceCriteria: "",
       taskTimeEstimate: 0,
     });
 
+    // "Reload" current page
     history.go(0);
   };
 
@@ -82,6 +89,7 @@ const TaskForm = ({ projectId, featureId }) => {
         Something went wrong.
       </Alert>
 
+      {/* Task name input */}
       <Form.Group className="mb-3">
         <Form.Label htmlFor="taskName">Name</Form.Label>
         <Form.Control
@@ -97,6 +105,7 @@ const TaskForm = ({ projectId, featureId }) => {
         </Form.Control.Feedback>
       </Form.Group>
 
+      {/* Task acceptance criteria input */}
       <Form.Group className="mb-3">
         <Form.Label htmlFor="taskAcceptanceCriteria">
           Acceptance criteria
@@ -117,6 +126,7 @@ THEN...`}
         </Form.Control.Feedback>
       </Form.Group>
 
+      {/* Task time estimate input */}
       <Form.Group className="mb-3">
         <Form.Label htmlFor="taskTimeEstimate">Time estimate (h)</Form.Label>
         <Form.Control
@@ -137,6 +147,7 @@ THEN...`}
         </Form.Control.Feedback>
       </Form.Group>
 
+      {/* On form submit, create task */}
       <Button type="submit" variant="success">
         Create
       </Button>

@@ -1,12 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
 
 // Import bootstrap components
 import { Breadcrumb } from "react-bootstrap";
 
 // Import Link component for all internal application hyperlinks
-import { Link } from "react-router-dom";
+// Import `useParams()` to retrieve value of the route parameter `:projectId`
+import { Link, useParams } from "react-router-dom";
 
+// Import components
+import FeatureList from "../components/FeatureList";
+import FeatureForm from "../components/FeatureForm";
+
+// Import API calls and authentication token functions
 import {
   getProject,
   getAllFeatures,
@@ -15,13 +20,11 @@ import {
 } from "../utils/API";
 import Auth from "../utils/auth";
 
-import FeatureList from "../components/FeatureList";
-import FeatureForm from "../components/FeatureForm";
-
 const ProjectFeatures = () => {
   // Use `useParams()` to retrieve value of the route parameter `:projectId`
   const { projectId } = useParams();
 
+  // Set initial states
   const [projectData, setProjectData] = useState({});
   const [featureData, setFeatureData] = useState({});
   const [teamMemberData, setTeamMemberData] = useState({});
@@ -34,7 +37,9 @@ const ProjectFeatures = () => {
   // Get project data
   useEffect(() => {
     const getProjectData = async () => {
+      // Since getProject is asynchronous, wrap in a `try...catch` to catch any network errors from throwing due to a failed request
       try {
+        // Check token before proceeding
         const token = Auth.loggedIn() ? Auth.getToken() : null;
 
         if (!token) {
@@ -61,7 +66,9 @@ const ProjectFeatures = () => {
   // Get feature data
   useEffect(() => {
     const getFeatureData = async () => {
+      // Since getAllFeatures is asynchronous, wrap in a `try...catch` to catch any network errors from throwing due to a failed request
       try {
+        // Check token before proceeding
         const token = Auth.loggedIn() ? Auth.getToken() : null;
 
         if (!token) {
@@ -88,7 +95,9 @@ const ProjectFeatures = () => {
   // Get team member data
   useEffect(() => {
     const getTeamMemberData = async () => {
+      // Since getUser is asynchronous, wrap in a `try...catch` to catch any network errors from throwing due to a failed request
       try {
+        // Check token before proceeding
         const token = Auth.loggedIn() ? Auth.getToken() : null;
 
         if (!token) {
@@ -114,12 +123,14 @@ const ProjectFeatures = () => {
 
   // Handle delete feature
   const handleDeleteFeature = async (projectId, featureId) => {
+    // Check token before proceeding
     const token = Auth.loggedIn() ? Auth.getToken() : null;
 
     if (!token) {
       return false;
     }
 
+    // Since deleteFeature and getAllFeatures are asynchronous, wrap in a `try...catch` to catch any network errors from throwing due to a failed request
     try {
       const response = await deleteFeature(projectId, featureId, token);
 
@@ -142,6 +153,7 @@ const ProjectFeatures = () => {
 
   return (
     <main>
+      {/* Breadcrumb navigation */}
       <Breadcrumb>
         <Breadcrumb.Item linkAs={Link} linkProps={{ to: "/" }}>
           Home
@@ -156,6 +168,7 @@ const ProjectFeatures = () => {
         </Breadcrumb.Item>
         <Breadcrumb.Item active>Add features</Breadcrumb.Item>
       </Breadcrumb>
+      {/* Page title */}
       <div className="d-flex feature justify-content-between align-items-center">
         <h2>Add features</h2>
         {featureData.length >= 1 && featureData[0].tasks.length >= 1 ? (
@@ -168,11 +181,13 @@ const ProjectFeatures = () => {
         ) : null}
       </div>
       <p>Break down {projectData.projectName} into features.</p>
+      {/* List displaying features in this project */}
       <FeatureList
         projectId={projectId}
         features={featureData}
         handleDeleteFeature={handleDeleteFeature}
       />
+      {/* Form for creating features in this project */}
       <FeatureForm projectId={projectId} teamMembers={teamMemberData} />
     </main>
   );

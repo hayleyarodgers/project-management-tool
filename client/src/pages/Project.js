@@ -4,21 +4,24 @@ import React, { useState, useEffect } from "react";
 import { Breadcrumb } from "react-bootstrap";
 
 // Import Link component for all internal application hyperlinks
-import { Link } from "react-router-dom";
-import { useParams } from "react-router-dom";
+// Import `useParams()` to retrieve value of the route parameter `:projectId`
+import { Link, useParams } from "react-router-dom";
+
+// Import components
 import ProjectChart from "../components/ProjectChart";
 
-// Import API calls
+// Import API call and authentication token functions
 import { getProject } from "../utils/API";
 import Auth from "../utils/auth";
 
 const Project = () => {
+  // Use `useParams()` to retrieve value of the route parameter `:projectId`
+  const { projectId } = useParams();
+
+  // Set initial states
   const [project, setProject] = useState({});
   const [rawHourEstimatesData, setRawHourEstimates] = useState({});
   const [modifiedWeekEstimatesData, setModifiedWeekEstimates] = useState({});
-
-  // Use `useParams()` to retrieve value of the route parameter `:projectId`
-  const { projectId } = useParams();
 
   // Use to determine if `useEffect()` hook needs to run again
   const projectDataLength = Object.keys(project).length;
@@ -26,7 +29,9 @@ const Project = () => {
   // Get project data
   useEffect(() => {
     const getProjectData = async () => {
+      // Since getProject is asynchronous, wrap in a `try...catch` to catch any network errors from throwing due to a failed request
       try {
+        // Check token before proceeding
         const token = Auth.loggedIn() ? Auth.getToken() : null;
 
         if (!token) {
@@ -42,7 +47,7 @@ const Project = () => {
         const project = await response.json();
         setProject(project);
 
-        // Create an object containing the total raw hour estimates per user user
+        // Create an object containing the total raw hour estimates per team member
         const rawHourEstimates = {};
 
         for (let i = 0; i < project.features.length; i++) {
@@ -64,7 +69,7 @@ const Project = () => {
         }
         setRawHourEstimates(rawHourEstimates);
 
-        // Create an object containing the total weeks per user by taking their efficiency and hours into account
+        // Create an object containing the total weeks of work per team member by taking their efficiency and hours into account
         const modifiedWeekEstimates = {};
 
         for (let i = 0; i < project.features.length; i++) {
@@ -101,6 +106,7 @@ const Project = () => {
 
   return (
     <main>
+      {/* Breadcrumb navigation */}
       <Breadcrumb>
         <Breadcrumb.Item linkAs={Link} linkProps={{ to: "/" }}>
           Home
@@ -110,12 +116,14 @@ const Project = () => {
         </Breadcrumb.Item>
         <Breadcrumb.Item active>{project.projectName}</Breadcrumb.Item>
       </Breadcrumb>
+      {/* Page title */}
       <div className="d-flex feature justify-content-between align-items-center">
         <h2>{project.projectName}</h2>
         <Link className="btn" to={`/myprojects/${projectId}/features`}>
           Edit project
         </Link>
       </div>
+      {/* Chart displaying estimated project completion */}
       <ProjectChart
         projectId={projectId}
         rawHourEstimates={rawHourEstimatesData}

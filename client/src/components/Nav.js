@@ -1,11 +1,19 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+// Import bootstrap components
 import { Navbar, Nav, Container, Modal, Tab } from "react-bootstrap";
-import "../styles/Nav.css";
+
+// Import Link component for all internal application hyperlinks
+import { Link } from "react-router-dom";
+
+// Import components
 import SignUpForm from "./SignupForm";
 import LoginForm from "./LoginForm";
 
+// Import authentication token function
 import Auth from "../utils/auth";
+
+// Import custom styles
+import "../styles/Nav.css";
 
 const AppNavbar = () => {
   // Set modal display state

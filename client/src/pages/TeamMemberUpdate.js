@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useHistory, Link } from "react-router-dom";
 
 // Import bootstrap components
 import { Form, Button, Alert, Breadcrumb } from "react-bootstrap";
 
-// Import API calls
+// Import Link component for all internal application hyperlinks
+// Import `useParams()` to retrieve value of the route parameter `:projectId`
+// Import `useHistory()` to access and edit browser history
+import { useParams, useHistory, Link } from "react-router-dom";
+
+// Import API calls and authentication token functions
 import { getTeamMember, updateTeamMember } from "../utils/API";
 import Auth from "../utils/auth";
 
@@ -23,6 +27,7 @@ const TeamMemberUpdate = () => {
   // Get team member data to populate form for easier updating
   useEffect(() => {
     const getTeamMemberData = async () => {
+      // Since getTeamMember is asynchronous, wrap in a `try...catch` to catch any network errors from throwing due to a failed request
       try {
         // Check token before proceeding
         const token = Auth.loggedIn() ? Auth.getToken() : null;
@@ -47,13 +52,13 @@ const TeamMemberUpdate = () => {
     getTeamMemberData();
   }, [teamMemberId]);
 
-  // Set form data when input of any form field changes
+  // When the input of any form field changes, set form data
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setTeamMemberData({ ...teamMemberData, [name]: value });
   };
 
-  // Update team member when button is clicked
+  // Update team member when form is submitted
   const handleFormSubmit = async (event) => {
     // Stop page refresh
     event.preventDefault();
@@ -88,11 +93,13 @@ const TeamMemberUpdate = () => {
       setShowAlert(true);
     }
 
+    // Go back to team dashboard
     history.push("/myteam");
   };
 
   return (
     <main>
+      {/* Breadcrumb navigation */}
       <Breadcrumb>
         <Breadcrumb.Item linkAs={Link} linkProps={{ to: "/" }}>
           Home
@@ -102,7 +109,9 @@ const TeamMemberUpdate = () => {
         </Breadcrumb.Item>
         <Breadcrumb.Item active>Update team member</Breadcrumb.Item>
       </Breadcrumb>
+      {/* Page title */}
       <h2>Update {teamMemberData.username}'s profile</h2>
+      {/* Form for updating team member */}
       <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
         {/* Show alert if server response is bad */}
         <Alert
@@ -113,6 +122,7 @@ const TeamMemberUpdate = () => {
           Something went wrong.
         </Alert>
 
+        {/* Team member username input */}
         <Form.Group className="mb-3">
           <Form.Label htmlFor="username">Username</Form.Label>
           <Form.Control
@@ -128,6 +138,7 @@ const TeamMemberUpdate = () => {
           </Form.Control.Feedback>
         </Form.Group>
 
+        {/* Team member role input */}
         <Form.Group className="mb-3">
           <Form.Label htmlFor="role">Role</Form.Label>
           <Form.Select
@@ -149,6 +160,7 @@ const TeamMemberUpdate = () => {
           </Form.Control.Feedback>
         </Form.Group>
 
+        {/* Team member efficiency input */}
         <Form.Group className="mb-3">
           <Form.Label htmlFor="efficiency">Efficiency</Form.Label>
           <Form.Control
@@ -170,6 +182,7 @@ const TeamMemberUpdate = () => {
           </Form.Control.Feedback>
         </Form.Group>
 
+        {/* Team member hours input */}
         <Form.Group className="mb-3">
           <Form.Label htmlFor="hoursPerWeek">Hours/week</Form.Label>
           <Form.Control
@@ -187,6 +200,7 @@ const TeamMemberUpdate = () => {
           </Form.Control.Feedback>
         </Form.Group>
 
+        {/* On form submit, update team member */}
         <Button type="submit" variant="success">
           Save
         </Button>

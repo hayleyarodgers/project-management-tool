@@ -1,6 +1,9 @@
 import React, { useState } from "react";
+
+// Import bootstrap components
 import { Form, Button, Alert } from "react-bootstrap";
 
+// Import API call, authentication token and saving userId to local storage functions
 import { signupUser } from "../utils/API";
 import Auth from "../utils/auth";
 import { saveUserId } from "../utils/localStorage";
@@ -17,11 +20,13 @@ const SignupForm = () => {
   // Set state for alert
   const [showAlert, setShowAlert] = useState(false);
 
+  // When the input of any form field changes, set form data
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setUserFormData({ ...userFormData, [name]: value });
   };
 
+  // Sign up user
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
@@ -41,7 +46,7 @@ const SignupForm = () => {
       }
 
       const { token, user } = await response.json();
-      console.log(user);
+      // Save user's id and token to local storage
       saveUserId(user._id);
       Auth.login(token);
     } catch (err) {
@@ -49,6 +54,7 @@ const SignupForm = () => {
       setShowAlert(true);
     }
 
+    // Reset form data
     setUserFormData({
       username: "",
       email: "",
@@ -69,6 +75,7 @@ const SignupForm = () => {
           Something went wrong with your sign up.
         </Alert>
 
+        {/* User username input */}
         <Form.Group>
           <Form.Label htmlFor="username">Username</Form.Label>
           <Form.Control
@@ -84,6 +91,7 @@ const SignupForm = () => {
           </Form.Control.Feedback>
         </Form.Group>
 
+        {/* User email input */}
         <Form.Group>
           <Form.Label htmlFor="email">Email</Form.Label>
           <Form.Control
@@ -99,6 +107,7 @@ const SignupForm = () => {
           </Form.Control.Feedback>
         </Form.Group>
 
+        {/* User password input */}
         <Form.Group>
           <Form.Label htmlFor="password">Password</Form.Label>
           <Form.Control
@@ -114,8 +123,9 @@ const SignupForm = () => {
           </Form.Control.Feedback>
         </Form.Group>
 
+        {/* On form submit, sign up */}
         <Button type="submit" variant="success">
-          Submit
+          Sign up
         </Button>
       </Form>
     </>

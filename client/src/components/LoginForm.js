@@ -1,7 +1,9 @@
-// see SignupForm.js for comments
 import React, { useState } from "react";
+
+// Import bootstrap components
 import { Form, Button, Alert } from "react-bootstrap";
 
+// Import API call, authentication token and saving userId to local storage functions
 import { loginUser } from "../utils/API";
 import Auth from "../utils/auth";
 import { saveUserId } from "../utils/localStorage";
@@ -17,11 +19,13 @@ const LoginForm = () => {
   // Set state for alert
   const [showAlert, setShowAlert] = useState(false);
 
+  // When the input of any form field changes, set form data
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setUserFormData({ ...userFormData, [name]: value });
   };
 
+  // Log in user
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
@@ -41,7 +45,7 @@ const LoginForm = () => {
       }
 
       const { token, user } = await response.json();
-      console.log(user);
+      // Save user's id and token to local storage
       saveUserId(user._id);
       Auth.login(token);
     } catch (err) {
@@ -49,6 +53,7 @@ const LoginForm = () => {
       setShowAlert(true);
     }
 
+    // Reset form data
     setUserFormData({
       username: "",
       password: "",
@@ -68,6 +73,7 @@ const LoginForm = () => {
           Something went wrong with your log in.
         </Alert>
 
+        {/* User username input */}
         <Form.Group>
           <Form.Label htmlFor="username">Username</Form.Label>
           <Form.Control
@@ -83,6 +89,7 @@ const LoginForm = () => {
           </Form.Control.Feedback>
         </Form.Group>
 
+        {/* User password input */}
         <Form.Group>
           <Form.Label htmlFor="password">Password</Form.Label>
           <Form.Control
@@ -98,8 +105,9 @@ const LoginForm = () => {
           </Form.Control.Feedback>
         </Form.Group>
 
+        {/* On form submit, log in */}
         <Button type="submit" variant="success">
-          Submit
+          Log in
         </Button>
       </Form>
     </>

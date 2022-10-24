@@ -1,3 +1,4 @@
+// Pick random colours for graph
 export const getRandomColor = () => {
   const colours = [
     "#FF0000",

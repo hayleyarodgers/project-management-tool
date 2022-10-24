@@ -25,6 +25,7 @@ class AuthService {
       // If token hasn't passed its expiration time, return `false`
       if (decoded.exp < Date.now() / 1000) {
         localStorage.removeItem("id_token");
+        localStorage.removeItem("saved_user_id");
         return true;
       } else return false;
     } catch (err) {

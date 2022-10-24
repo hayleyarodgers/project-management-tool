@@ -10,15 +10,19 @@ const TaskList = ({
   tasks,
   handleDeleteTask,
 }) => {
+  // If no tasks, return nothing
   if (!tasks.length) {
     return <></>;
   }
 
   return (
-    <div id="existing-tasks">
+    <div>
+      {/* For each task, render a card */}
       {tasks &&
         tasks.map((task) => (
           <Card key={task._id} className="card mb-3 border-0">
+            {/* If parent feature is a must have, render task blue */}
+            {/* If parent feature is NOT a must have, render task grey */}
             {featureMustHave ? (
               <Card.Body className="d-flex task musthave justify-content-between align-items-center">
                 <div className="pl-2">

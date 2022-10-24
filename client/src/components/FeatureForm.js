@@ -1,11 +1,17 @@
 import React, { useState } from "react";
+
+// Import bootstrap components
 import { Form, Button, Alert } from "react-bootstrap";
+
+// Import `useHistory()` to access and edit browser history
 import { useHistory } from "react-router-dom";
 
+// Import API call and authentication token functions
 import { createFeature } from "../utils/API";
 import Auth from "../utils/auth";
 
 const FeatureForm = ({ projectId, teamMembers }) => {
+  // Use `useHistory()` to access and edit browser history
   const history = useHistory();
 
   // Set initial form state
@@ -15,13 +21,12 @@ const FeatureForm = ({ projectId, teamMembers }) => {
     featureMustHave: "",
     featureAssignee: "",
   });
-
   // Set state for form validation
   const [validated] = useState(false);
   // Set state for alert
   const [showAlert, setShowAlert] = useState(false);
 
-  // Set form data when input of any form field changes
+  // When the input of any form field changes, set form data
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setFeatureFormData({ ...featureFormData, [name]: value });
@@ -32,7 +37,7 @@ const FeatureForm = ({ projectId, teamMembers }) => {
     // Stop page refresh
     event.preventDefault();
 
-    // Check token before proceeding to create new feature
+    // Check token before proceeding
     const token = Auth.loggedIn() ? Auth.getToken() : null;
 
     if (!token) {
@@ -58,6 +63,7 @@ const FeatureForm = ({ projectId, teamMembers }) => {
       setShowAlert(true);
     }
 
+    // Reset form data
     setFeatureFormData({
       featureName: "",
       featureDescription: "",
@@ -65,9 +71,11 @@ const FeatureForm = ({ projectId, teamMembers }) => {
       featureAssignee: "",
     });
 
+    // "Reload" current page
     history.go(0);
   };
 
+  // If still getting data, render the following
   if (!teamMembers.length) {
     return <h3>Loading</h3>;
   }
@@ -83,6 +91,7 @@ const FeatureForm = ({ projectId, teamMembers }) => {
         Something went wrong.
       </Alert>
 
+      {/* Feature name input */}
       <Form.Group className="mb-3">
         <Form.Label htmlFor="featureName">Name</Form.Label>
         <Form.Control
@@ -98,6 +107,7 @@ const FeatureForm = ({ projectId, teamMembers }) => {
         </Form.Control.Feedback>
       </Form.Group>
 
+      {/* Feature description input */}
       <Form.Group className="mb-3">
         <Form.Label htmlFor="featureDescription">Description</Form.Label>
         <Form.Control
@@ -114,6 +124,7 @@ const FeatureForm = ({ projectId, teamMembers }) => {
         </Form.Control.Feedback>
       </Form.Group>
 
+      {/* Feature must have input */}
       <Form.Group className="mb-3">
         <Form.Label htmlFor="featureMustHave">Must have?</Form.Label>
         <Form.Select
@@ -130,6 +141,7 @@ const FeatureForm = ({ projectId, teamMembers }) => {
         </Form.Control.Feedback>
       </Form.Group>
 
+      {/* Feature assignee input */}
       <Form.Group className="mb-3">
         <Form.Label htmlFor="featureAssignee">Assignee</Form.Label>
         <Form.Select
@@ -150,6 +162,7 @@ const FeatureForm = ({ projectId, teamMembers }) => {
         </Form.Control.Feedback>
       </Form.Group>
 
+      {/* On form submit, create feature */}
       <Button type="submit" variant="success">
         Create
       </Button>
