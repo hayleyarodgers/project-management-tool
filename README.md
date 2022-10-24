@@ -1,7 +1,5 @@
 # project-management-tool
 
-# Pawfect Match
-
 ## Table of Contents
 
 * [Description](#description)
